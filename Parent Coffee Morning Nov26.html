@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>电子产品平衡使用 · 家长工作坊</title>
+<style>
+  :root{
+    --bg:#fbfaf7; --bg2:#f0ede5; --navy:#1e3a6e; --navy-d:#16305c; --navy-l:#2e5290;
+    --crimson:#a02c2c; --crimson-d:#8a2424;
+    --ink:#253044; --ink2:#566173; --line:#dcd9ce; --hair:#e6e3da;
+    --a1:#1e3a6e; --a2:#2e5290; --a3:#a02c2c; --a4:#50709e;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);font-family:"PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);line-height:1.75;}
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px 80px;}
+
+  nav{position:sticky;top:0;z-index:50;
+    background:rgba(251,250,247,.82);backdrop-filter:blur(16px) saturate(1.1);-webkit-backdrop-filter:blur(16px);
+    padding:0 36px;display:flex;align-items:center;justify-content:space-between;min-height:64px;
+    border-bottom:1px solid rgba(30,58,110,.13);}
+  nav .brand{display:flex;flex-direction:column;line-height:1.15;padding:6px 0;}
+  nav .brand .b-sub{font-size:8.5px;letter-spacing:3.5px;color:#9aa3b2;font-weight:600;}
+  nav .brand .b-main{font-family:"Songti SC","STSong",serif;font-weight:700;font-size:17px;letter-spacing:3px;color:var(--navy);}
+  nav .links{display:flex;align-items:center;gap:2px;}
+  nav a{color:#5a6472;text-decoration:none;font-size:12.5px;letter-spacing:2px;padding:8px 13px;position:relative;white-space:nowrap;transition:color .18s;}
+  nav a::after{content:"";position:absolute;left:13px;right:13px;bottom:2px;height:1px;background:var(--crimson);transform:scaleX(0);transition:transform .22s;}
+  nav a:hover{color:var(--navy);}
+  nav a:hover::after{transform:scaleX(1);}
+  @media(max-width:640px){nav .links{display:none;}}
+
+  .hero{text-align:center;padding:64px 0 34px;}
+  .eyebrow{letter-spacing:6px;color:var(--crimson);font-size:11px;font-weight:600;text-transform:uppercase;}
+  .hero .rule{width:56px;height:2px;background:var(--crimson);margin:18px auto;}
+  .hero h1{font-family:"Songti SC","STSong","STKaiti",serif;font-size:40px;letter-spacing:6px;margin:6px 0 12px;font-weight:700;color:var(--navy);}
+  .hero .sub{font-size:14.5px;color:var(--ink2);letter-spacing:2px;}
+  .meta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:26px;font-size:12px;color:var(--ink2);}
+  .meta span{background:rgba(255,255,255,.7);border:1px solid var(--hair);border-radius:100px;padding:6px 18px;letter-spacing:1px;}
+  .meta b{color:var(--navy);font-weight:600;}
+
+  .agenda{max-width:720px;margin:34px auto 0;background:rgba(255,255,255,.75);border:1px solid var(--navy);border-radius:14px;padding:22px 28px;position:relative;}
+  .agenda::after{content:"";position:absolute;inset:5px;border:1px solid var(--hair);border-radius:10px;pointer-events:none;}
+  .agenda h3{font-family:"Songti SC",serif;color:var(--navy);font-size:13px;letter-spacing:4px;margin-bottom:12px;text-align:center;}
+  .agenda .row{display:flex;gap:12px;font-size:13px;padding:6px 0;color:var(--ink2);align-items:baseline;border-bottom:1px dashed var(--hair);}
+  .agenda .row:last-child{border-bottom:none;}
+  .agenda .t{font-weight:700;color:var(--crimson);white-space:nowrap;min-width:58px;letter-spacing:1px;}
+
+  .sec{margin-top:44px;}
+  .act{border:1px solid var(--hair);border-radius:14px;background:rgba(255,255,255,.75);overflow:hidden;margin-bottom:18px;box-shadow:0 1px 2px rgba(30,58,110,.05);}
+  .act .a-head{display:flex;align-items:center;gap:16px;padding:18px 24px;cursor:pointer;user-select:none;transition:background .15s;}
+  .act .a-head:hover{background:rgba(255,255,255,.95);}
+  .act .a-num{font-family:"Songti SC",serif;font-size:22px;font-weight:700;width:46px;height:46px;line-height:46px;text-align:center;color:#fff;border-radius:12px;flex-shrink:0;}
+  .act .a-tt{flex:1;}
+  .act .a-tt .t{font-size:16.5px;font-weight:700;letter-spacing:.5px;color:var(--navy);}
+  .act .a-tt .meta{font-size:11.5px;color:var(--ink2);margin-top:2px;letter-spacing:1px;display:block;}
+  .act .a-ar{color:var(--navy);font-size:20px;transition:transform .2s;}
+  .act.open .a-ar{transform:rotate(90deg);}
+  .act .a-body{display:none;padding:8px 24px 24px;border-top:1px solid var(--hair);}
+  .act.open .a-body{display:block;}
+  .n1 .a-num{background:var(--a1);}
+  .n2 .a-num{background:var(--a2);}
+  .n3 .a-num{background:var(--a3);}
+  .n4 .a-num{background:var(--a4);}
+
+  .goal{font-size:13px;color:var(--navy);font-weight:600;margin:14px 0 10px;letter-spacing:.5px;padding-left:12px;border-left:2px solid var(--crimson);}
+  .subhead{font-size:12.5px;font-weight:700;color:var(--navy);letter-spacing:2px;margin:18px 0 8px;}
+  .subhead::before{content:"▍";color:var(--crimson);margin-right:6px;}
+  .gongyue-link{display:inline-block;margin:2px 0 10px;background:var(--navy);color:#fff;font-size:13px;font-weight:600;
+    padding:9px 18px;border-radius:100px;text-decoration:none;letter-spacing:1px;border:1px solid var(--navy);
+    transition:background .15s,border-color .15s;font-family:"PingFang SC","Microsoft YaHei",sans-serif;}
+  .gongyue-link:hover{background:var(--crimson);border-color:var(--crimson);color:#fff;}
+  .pt{font-size:13px;color:var(--ink2);line-height:1.85;padding:2px 0;}
+  .pt b{color:var(--ink);}
+  .src{display:inline-block;font-size:9.5px;color:var(--navy);background:#e9eef6;border-radius:8px;padding:1px 7px;margin-left:6px;font-weight:600;letter-spacing:.5px;vertical-align:1px;}
+
+  .dev-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px;}
+  .dev-table th{background:var(--navy);color:#fff;padding:9px 10px;font-weight:600;letter-spacing:1px;font-size:11.5px;}
+  .dev-table td{border:1px solid var(--hair);padding:9px 11px;vertical-align:top;line-height:1.7;background:rgba(255,255,255,.6);}
+  .dev-table td.age{font-weight:700;color:var(--navy);width:80px;white-space:nowrap;}
+
+  .factor{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:10px;}
+  @media(max-width:720px){.factor{grid-template-columns:1fr;}}
+  .factor .f{border-radius:14px;padding:18px;color:#fff;}
+  .factor .f h4{font-size:15px;font-family:"Songti SC",serif;margin-bottom:10px;letter-spacing:1px;}
+  .factor .f ul{margin-left:16px;font-size:12px;line-height:1.8;opacity:.96;}
+  .factor .f.int{background:var(--navy-l);}
+  .factor .f.fam{background:var(--crimson);}
+  .factor .f.soc{background:var(--navy-d);}
+  .factor .f .s{display:block;font-size:10px;opacity:.78;margin-top:2px;}
+
+  .redflags{border:1px solid #d0a099;border-radius:14px;background:#fbf1ef;padding:18px 22px;margin-top:18px;}
+  .redflags h4{color:var(--crimson);font-size:15px;margin-bottom:12px;font-family:"Songti SC",serif;letter-spacing:1px;}
+  .flag-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  @media(max-width:720px){.flag-grid{grid-template-columns:1fr;}}
+  .flag .fh{font-weight:700;font-size:13px;margin-bottom:8px;color:var(--crimson);letter-spacing:1px;}
+  .flag ul{margin-left:0;font-size:12px;color:var(--ink2);line-height:1.75;list-style:none;}
+  .flag ul li{padding:3px 0 3px 18px;position:relative;}
+  .flag ul li::before{content:"🚩";position:absolute;left:0;font-size:10px;top:6px;}
+  .flag-note{font-size:11.5px;color:var(--crimson);margin-top:14px;font-weight:600;padding-top:10px;border-top:1px dashed #d9b6b0;}
+
+  .biblio{background:rgba(255,255,255,.75);border:1px solid var(--navy);border-radius:14px;padding:24px 28px;margin-top:10px;position:relative;}
+  .biblio::after{content:"";position:absolute;inset:5px;border:1px solid var(--hair);border-radius:10px;pointer-events:none;}
+  .biblio .b{margin-bottom:14px;font-size:13px;color:var(--ink2);line-height:1.8;position:relative;z-index:1;}
+  .biblio .b b{color:var(--navy);font-size:14px;}
+  .biblio .b .used{font-size:11px;color:var(--crimson);}
+  .biblio .b .used b{color:var(--crimson);font-size:11px;}
+
+  footer{background:var(--navy-d);color:#b9c6dd;padding:34px 0;margin-top:60px;text-align:center;font-size:12.5px;line-height:2;letter-spacing:1px;border-top:3px solid var(--crimson);}
+  footer b{color:#e0a9a2;}
+  .printbar{position:fixed;bottom:22px;right:22px;z-index:50;}
+  .printbar button{background:var(--navy);border:1px solid var(--crimson);color:#fff;font-weight:600;padding:11px 22px;border-radius:100px;cursor:pointer;font-size:13px;letter-spacing:1px;box-shadow:0 6px 20px rgba(22,48,92,.3);transition:all .15s;}
+  .printbar button:hover{background:var(--crimson);border-color:var(--crimson);}
+
+  /* ===== 内嵌材料 ===== */
+  .mat{margin-top:18px;border:1px solid var(--hair);border-radius:12px;background:#fff;overflow:hidden;}
+  .mat .mat-head{padding:10px 16px;background:rgba(30,58,110,.045);font-size:12.5px;font-weight:700;color:var(--navy);letter-spacing:1px;border-bottom:1px solid var(--hair);display:flex;align-items:center;justify-content:space-between;}
+  .mat-head .mat-tip{font-size:10px;font-weight:500;color:#8a8271;letter-spacing:0;}
+  @media print{.mat-head .mat-tip{display:none;}}
+  .mat .mat-body{padding:16px;}
+
+  /* ===== BINGO 卡 · 高级版 ===== */
+  .bingo-mat .mat-body{padding:0;}
+  .bingo-head{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;padding:12px 12px 4px;background:linear-gradient(180deg,#fdfcf8,#f5f0e4);}
+  .bh-l{position:relative;text-align:center;font-family:"Songti SC","STSong",serif;font-size:26px;font-weight:700;color:var(--navy);letter-spacing:1px;line-height:1;}
+  .bh-l b{position:absolute;left:50%;bottom:-3px;transform:translateX(-50%);width:16px;height:3px;background:var(--crimson);border-radius:3px;}
+  .bingo-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;padding:8px 12px 12px;background:linear-gradient(180deg,#f5f0e4,#fbfaf7);}
+  .bingo-cell{position:relative;border:1px solid #e3ddcd;border-radius:10px;padding:9px 6px 7px;min-height:74px;background:#fff;box-shadow:0 1px 2px rgba(30,58,110,.04);display:flex;flex-direction:column;justify-content:space-between;text-align:center;transition:transform .15s,box-shadow .15s,border-color .15s;}
+  .bingo-cell:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(30,58,110,.13);border-color:var(--navy-l);}
+  .bingo-cell .num{position:absolute;top:5px;left:6px;width:17px;height:17px;line-height:17px;border-radius:50%;background:var(--navy);color:#fff;font-size:9px;font-weight:700;text-align:center;}
+  .bingo-cell .txt{flex:1;display:flex;align-items:center;justify-content:center;font-size:10.5px;line-height:1.4;color:var(--ink2);padding-top:9px;}
+  .bingo-cell .sign{margin-top:5px;border-top:1.5px dashed #cbc1a9;padding-top:2px;font-size:8px;color:#b4ac96;letter-spacing:2px;}
+  .bingo-tip{margin:0;padding:0 16px 14px;background:#fbfaf7;font-size:11px;color:var(--ink2);text-align:center;letter-spacing:.5px;}
+  .bingo-tip b{color:var(--crimson);}
+  .matbtn{background:var(--navy);color:#fff;border:1px solid var(--navy);padding:6px 15px;border-radius:100px;cursor:pointer;font-size:11.5px;letter-spacing:1px;transition:all .15s;}
+  .matbtn:hover{background:var(--crimson);border-color:var(--crimson);}
+  .matbtn.ghost{background:transparent;color:var(--ink2);border:1px solid var(--hair);}
+
+  .day24{width:100%;border-collapse:collapse;font-size:12px;margin-top:4px;}
+  .day24 th{background:var(--navy);color:#fff;padding:7px 9px;font-weight:600;font-size:11.5px;text-align:left;letter-spacing:1px;}
+  .day24 td{border:1px solid var(--hair);padding:7px 9px;vertical-align:middle;background:#fff;line-height:1.55;}
+  .day24 td.t{font-weight:700;color:var(--navy);white-space:nowrap;width:82px;}
+  .tag{display:inline-block;font-size:9.5px;font-weight:700;border-radius:9px;padding:1px 7px;}
+  .tag.no{background:#f6f1ea;color:#8a7f6a;}
+  .tag.ok{background:#eef4ee;color:#6a7f63;}
+  .tag.learn{background:#f9ecec;color:var(--crimson);}
+  /* 可填写工作纸：contenteditable 填写框 */
+  .day24pie svg{width:258px;height:258px;flex:0 0 auto;}
+
+
+  /* ===== 平衡 · 饮食类比 ===== */
+  .diet{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 4px;}
+  @media(max-width:760px){.diet{grid-template-columns:1fr;}}
+  .diet-card{border:1px solid var(--hair);border-radius:12px;padding:13px 15px;background:#fff;border-top:3px solid var(--navy);}
+  .diet-card.d-offline{border-top-color:#4f81a8;}
+  .diet-card.d-active{border-top-color:#5e8c6a;}
+  .diet-card.d-passive{border-top-color:#d99a3e;}
+  .d-ic{font-size:24px;line-height:1;}
+  .d-t{font-size:13px;font-weight:800;color:var(--navy);margin:7px 0 4px;letter-spacing:.5px;}
+  .d-d{font-size:11px;color:var(--ink2);line-height:1.65;}
+  .d-d b{color:var(--crimson);}
+
+
+  .hooks{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+  @media(max-width:720px){.hooks{grid-template-columns:1fr;}}
+  .hook{border:1px solid var(--hair);border-radius:10px;padding:10px 12px;background:#fff;border-left:3px solid var(--crimson);}
+  .hook h5{font-size:12.5px;color:var(--navy);margin-bottom:3px;}
+  .hook .why{font-size:11px;color:var(--ink2);line-height:1.6;}
+  .hook .fix{font-size:10.5px;color:var(--crimson);margin-top:5px;line-height:1.5;}
+  .hook .fix::before{content:"破法：";font-weight:700;}
+
+  .step-list{border:1px solid var(--hair);border-radius:10px;overflow:hidden;margin-top:6px;}
+  .step-item{padding:10px 14px;border-bottom:1px solid var(--hair);background:#fff;}
+  .step-item:last-child{border-bottom:none;}
+  .step-item .sn{font-family:"Songti SC",serif;font-weight:700;color:var(--crimson);font-size:12.5px;margin-right:6px;}
+  .step-item b{color:var(--navy);font-size:12.5px;}
+  .step-item p{font-size:11.5px;color:var(--ink2);margin-top:2px;line-height:1.65;}
+
+  .law-sub{border:1px solid var(--hair);border-radius:10px;margin:8px 0;overflow:hidden;}
+  .law-sub .lh{padding:7px 12px;font-size:12.5px;font-weight:700;color:#fff;display:flex;justify-content:space-between;align-items:center;}
+  .law-sub .lh .en{font-size:9.5px;opacity:.8;font-weight:400;letter-spacing:.5px;}
+  .law-sub .item{padding:6px 12px;font-size:11.5px;color:var(--ink2);line-height:1.6;border-top:1px solid #f3f0e8;}
+  .law-sub .item b{color:var(--ink);}
+  .law-sub .item .d{color:var(--crimson);display:block;font-size:10.5px;margin-top:1px;}
+  .law-sub .item .d::before{content:"📱 ";font-weight:700;}
+  .law-head{margin-top:12px;font-size:12px;font-weight:700;color:var(--navy);letter-spacing:1px;}
+
+  .chart-head{font-size:13px;margin:10px 0 6px;font-weight:700;color:var(--navy);}
+  .chart-head .ib{display:inline-block;min-width:160px;border-bottom:1.5px solid var(--navy);}
+  .chart-grid{width:100%;border-collapse:collapse;}
+  .chart-grid td{border:1.5px solid var(--hair);height:38px;text-align:center;vertical-align:top;padding:3px;background:#fff;}
+  .chart-grid td .d{font-size:11px;font-weight:700;color:var(--navy);line-height:1;}
+  .chart-grid td .box{width:16px;height:16px;border:1.5px solid #b7b0a0;border-radius:4px;margin:3px auto 0;}
+  .chart-tip{font-size:11px;color:var(--ink2);margin-top:8px;line-height:1.6;}
+  .identity-tpl{background:#fff;border:1px dashed var(--navy);border-radius:10px;padding:10px 14px;font-size:14px;margin-top:6px;}
+  .identity-tpl b{color:var(--navy);}
+  .identity-tpl .ib{display:inline-block;min-width:150px;border-bottom:1.5px solid var(--navy);}
+
+  /* ===== 活动4 · 习惯养成完整周期（Atomic Habits）===== */
+  .thesis{background:rgba(255,255,255,.75);border:1px solid var(--navy);border-radius:12px;
+    padding:14px 20px;margin:8px 0 4px;font-size:13px;line-height:1.85;}
+  .thesis b{color:var(--crimson);}
+  .thesis .en{display:block;font-style:italic;color:var(--ink2);font-size:11.5px;margin-top:4px;}
+
+  .cycle{display:flex;align-items:stretch;justify-content:center;gap:0;margin:16px auto 2px;flex-wrap:wrap;}
+  .cnode{flex:1;min-width:104px;max-width:140px;border-radius:12px;padding:12px 8px;text-align:center;color:#fff;}
+  .cnode .st{font-size:9.5px;letter-spacing:1px;opacity:.85;font-weight:600;}
+  .cnode .big{font-family:"Songti SC",serif;font-size:15px;font-weight:700;margin:3px 0 2px;}
+  .cnode .en{font-size:8.5px;opacity:.75;letter-spacing:.4px;}
+  .carrow{display:flex;align-items:center;color:var(--crimson);font-size:17px;font-weight:700;padding:0 2px;}
+  .cn1{background:#8a6f3e;}.cn2{background:#3d6b8f;}.cn3{background:#7d5ba6;}.cn4{background:#4a7c59;}.cn5{background:#b07d3a;}.cn6{background:#6b7280;}
+  .cycle-note{text-align:center;font-size:11.5px;color:var(--ink2);margin-bottom:4px;}
+  .cycle-note b{color:var(--crimson);}
+
+  .step{border:1px solid var(--hair);border-radius:12px;margin-bottom:10px;overflow:hidden;background:#fff;}
+  .step .s-head{display:flex;align-items:center;gap:12px;padding:12px 16px;cursor:pointer;user-select:none;}
+  .step .s-head:hover{background:rgba(30,58,110,.04);}
+  .step .snum{font-family:"Songti SC",serif;font-size:18px;font-weight:700;width:32px;text-align:center;color:var(--crimson);flex-shrink:0;}
+  .step .stt{flex:1;font-size:14.5px;font-weight:700;color:var(--navy);}
+  .step .stt .en{display:block;font-size:10px;color:var(--ink2);font-weight:400;letter-spacing:.5px;}
+  .step .ar{color:var(--navy);font-size:18px;transition:transform .2s;}
+  .step.open .ar{transform:rotate(90deg);}
+  .step .s-body{display:none;padding:6px 16px 16px;border-top:1px dashed var(--hair);}
+  .step.open .s-body{display:block;}
+  .step .q{font-size:12.5px;color:var(--crimson);font-style:italic;margin:10px 0;padding-left:12px;border-left:3px solid var(--crimson);}
+  .step .blk{margin-bottom:8px;}
+  .step .blk h4{font-size:10.5px;color:var(--ink2);letter-spacing:2px;margin-bottom:4px;text-transform:uppercase;}
+  .step .blk p{font-size:12px;color:var(--ink2);line-height:1.75;}
+  .step .blk p b{color:var(--ink);}
+  .step .do{border:1px solid #bcd6c4;background:#eef5ef;border-radius:8px;padding:9px 12px;font-size:12px;color:var(--ink2);line-height:1.7;}
+  .step .do b{color:#4a7c59;}
+  .step .eg{background:#f4f1e9;border-radius:8px;padding:9px 12px;font-size:12px;color:var(--ink2);line-height:1.7;margin-top:6px;}
+  .step .eg b{color:var(--crimson);}
+
+  .compare{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px;}
+  .compare th{background:var(--navy);color:#fff;padding:8px 10px;font-weight:600;letter-spacing:1px;}
+  .compare td{border:1px solid var(--hair);padding:9px 11px;vertical-align:top;line-height:1.65;background:rgba(255,255,255,.7);}
+  .compare td.sc{font-weight:700;color:var(--crimson);width:96px;text-align:center;white-space:nowrap;}
+  .compare td.bad b{color:var(--crimson);}
+  .compare td.good b{color:var(--navy);}
+
+  .toolkit-field{margin-bottom:10px;}
+  .toolkit-field .lab{font-size:12px;color:var(--ink2);font-weight:700;}
+  .toolkit-field .blank{display:block;border-bottom:1.5px solid var(--navy);height:22px;margin-top:2px;}
+
+  .day24pie{display:flex;gap:22px;align-items:center;flex-wrap:wrap;margin-top:14px;padding-top:14px;border-top:1px dashed var(--hair);}
+  .day24pie svg{width:236px;height:236px;flex:0 0 auto;}
+  .day24pie .pl{flex:1 1 200px;min-width:190px;}
+  .day24pie .pl-t{font-size:11.5px;font-weight:700;color:var(--navy);margin-bottom:7px;letter-spacing:.5px;}
+  .day24pie .li{display:flex;align-items:center;gap:8px;font-size:10.5px;color:var(--ink2);padding:2.5px 0;}
+  .day24pie .sw{width:13px;height:13px;border-radius:4px;flex:0 0 auto;border:1px solid rgba(0,0,0,.12);}
+  .day24pie .li b{color:var(--ink);}
+  .day24pie .li .h{margin-left:auto;font-weight:700;color:var(--navy);font-size:10.5px;white-space:nowrap;}
+  .day24pie .note{margin-top:7px;font-size:10px;color:var(--crimson);font-weight:600;line-height:1.5;}
+  .day24pie .clock-cap{font-size:9.5px;color:#a89f8a;letter-spacing:1px;text-align:center;margin-top:9px;padding-top:8px;border-top:1px dashed var(--hair);}
+  /* 24小时排程编辑器 */
+  .day24pie .pl-t b{color:var(--crimson);}
+  .day-rows{margin:6px 0 10px;display:flex;flex-direction:column;gap:6px;}
+  .day-row{display:flex;align-items:center;gap:8px;padding:8px 12px;background:#fff;border:1px solid var(--hair);border-radius:11px;transition:border-color .15s,box-shadow .15s,transform .15s;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .day-row:hover{border-color:#c9bfa8;box-shadow:0 2px 10px rgba(46,82,144,.10);transform:translateY(-1px);}
+  .day-row .sw{width:13px;height:13px;border-radius:4px;flex:0 0 auto;border:1px solid rgba(0,0,0,.10);box-shadow:inset 0 1px 2px rgba(0,0,0,.08);}
+  .day-row input,.day-row select{font-size:11px;color:var(--ink);border:none;border-bottom:1px dashed #ddd4bf;background:transparent;border-radius:0;padding:2px 3px;outline:none;font-family:inherit;font-weight:600;}
+  .day-row select{font-weight:500;}
+  .day-row input:hover,.day-row select:hover{background:#faf7f0;border-bottom-color:#c9bfa8;}
+  .day-row input:focus,.day-row select:focus{background:#fff;border-bottom:1px solid var(--crimson);box-shadow:0 1px 0 0 var(--crimson);}
+  .day-row .dr-n{flex:1 1 auto;min-width:90px;}
+  .day-row .dr-t{width:74px;flex:0 0 auto;text-align:center;font-variant-numeric:tabular-nums;color:var(--ink);}
+  .day-row .dr-dash{color:#c5bba2;flex:0 0 auto;font-weight:400;}
+  .day-row .dr-tag{flex:0 0 auto;font-size:9.5px;color:var(--ink2);}
+  .day-row .dr-h{flex:0 0 auto;font-size:9.5px;font-weight:700;color:var(--navy);background:#edf1f8;border-radius:999px;padding:2px 9px;min-width:30px;text-align:center;font-variant-numeric:tabular-nums;}
+  .day-row .dr-del{flex:0 0 auto;width:20px;height:20px;border:1px solid var(--hair);border-radius:50%;background:#fff;color:#b0885a;font-size:12px;line-height:1;cursor:pointer;padding:0;transition:background .15s,color .15s,border-color .15s;}
+  .day-row .dr-del:hover{background:#f6ecec;color:var(--crimson);border-color:var(--crimson);}
+  #dayAddBtn{width:100%;font-size:11px;font-weight:700;color:var(--navy);background:#fff;border:1.5px dashed #b9c4d8;border-radius:10px;padding:8px 14px;cursor:pointer;letter-spacing:1px;transition:border-color .15s,background .15s,color .15s;}
+  #dayAddBtn:hover{border-color:var(--navy);background:#f4f7fb;}
+  #dayAddBtn:disabled{cursor:not-allowed;color:#a89f8a;border-color:var(--hair);background:#faf8f3;border-style:solid;}
+  #dayAddBtn:disabled:hover{border-color:var(--hair);background:#faf8f3;}
+  #daySum{margin-top:10px;font-size:10.5px;line-height:1.8;color:var(--ink2);background:#f8f6f0;border:1px solid var(--hair);border-radius:11px;padding:9px 13px;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  #daySum .warn{color:var(--crimson);font-weight:700;}
+  #daySum .good{color:#5e8c6a;font-weight:700;}
+  #daySum b{color:var(--navy);}
+  #pieSegs path{cursor:pointer;}
+  #pieSegs path:hover{opacity:.82;}
+  .pie-lbl{display:none;}
+
+  @media print{
+    @page{size:A4;margin:10mm 12mm;}
+    /* 打印版：饼图扇区显示活动名标签 */
+    .pie-lbl{display:block;}
+    /* 整页打印：强制展开所有活动手风琴，否则折叠内容打不出来 */
+    .act .a-body{display:block !important;}
+    body.printing-toolkit nav,body.printing-toolkit .printbar,body.printing-toolkit footer{display:none !important;}
+    body.printing-toolkit .wrap > *:not(.print-keep){display:none !important;}
+    body.printing-toolkit .print-keep .a-head{display:none !important;}
+    body.printing-toolkit .print-keep .act .a-body{display:block !important;}
+    body.printing-toolkit .print-keep .a-body > *:not(#toolkitCard){display:none !important;}
+    body.printing-toolkit #toolkitCard{margin:0;border:1px solid var(--hair);}
+    #toolkitCard .matbtn{display:none;}
+    .day24 td{background:#fff !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .day24 th{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .day24pie svg{width:230px;height:230px;}
+    /* 排程编辑器打印：隐藏按钮，输入框变纯文本 */
+    .day-row .dr-del,#dayAddBtn{display:none !important;}
+    .day-row input,.day-row select{border:none !important;background:transparent !important;color:#000 !important;-webkit-appearance:none;appearance:none;padding:0;}
+    .day-row{break-inside:avoid;}
+    .day24pie{page-break-inside:avoid;}
+    /* 单独打印「24小时工作纸+钟面排程器」 */
+    body.printing-day nav,body.printing-day .printbar,body.printing-day footer{display:none !important;}
+    body.printing-day .wrap > *:not(.print-keep-day){display:none !important;}
+    body.printing-day .print-keep-day .a-head{display:none !important;}
+    body.printing-day .print-keep-day .act .a-body{display:block !important;}
+    body.printing-day .print-keep-day .a-body > *:not(#dayMat){display:none !important;}
+    body.printing-day #biblio{display:none !important;}
+    #dayMat{margin:0;border:1px solid var(--hair);}
+    /* 只打印「钟面 + 排一排」块（不含上方表格） */
+    body.printing-sched nav,body.printing-sched .printbar,body.printing-sched footer{display:none !important;}
+    body.printing-sched .wrap > *:not(.print-keep-day){display:none !important;}
+    body.printing-sched .print-keep-day .a-head{display:none !important;}
+    body.printing-sched .print-keep-day .act .a-body{display:block !important;}
+    body.printing-sched .print-keep-day .a-body > *:not(#dayMat){display:none !important;}
+    body.printing-sched #biblio{display:none !important;}
+    body.printing-sched #biblio{display:none !important;}
+    body.printing-sched #dayMat{margin:0;border:none;background:#fff;}
+    body.printing-sched #dayMat > .mat-head{display:none !important;}
+    body.printing-sched #dayMat .day24{display:none !important;}
+    body.printing-sched #dayMat .redflags{display:none !important;}
+    body.printing-sched #dayMat .redflags{display:none !important;}
+    body.printing-sched #dayPieCard{margin:0;padding:0;border-top:none;display:flex;flex-direction:column;align-items:center;gap:8px;}
+    body.printing-sched #dayPieCard svg{width:340px;height:340px;flex:0 0 auto;break-inside:avoid;page-break-inside:avoid;}
+    body.printing-sched #dayPieCard .pl{width:100%;flex:none;min-width:0;}
+    body.printing-sched .pl-t{font-size:11px;margin-bottom:5px;text-align:center;}
+    body.printing-sched .day-row{padding:5px 10px;gap:6px;}
+    body.printing-sched .day-row input,body.printing-sched .day-row select{font-size:10px;}
+    body.printing-sched #daySum{margin-top:8px;padding:7px 11px;font-size:10px;}
+    body.printing-sched .dr-del,#dayAddBtn,.matbtn{display:none !important;}
+    body.printing-sched .day-row input,body.printing-sched .day-row select{border:none !important;background:transparent !important;color:#000 !important;-webkit-appearance:none;appearance:none;padding:0;}
+    body.printing-sched .day-row input::-webkit-calendar-picker-indicator{display:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">
+    <span class="b-sub">PARENT WORKSHOP</span>
+    <span class="b-main">家长工作坊</span>
+  </div>
+  <div class="links">
+    <a href="#hero">总览</a>
+    <a href="#act1">活动一</a>
+    <a href="#act2">活动二</a>
+    <a href="#act3">活动三</a>
+    <a href="#act4">活动四</a>
+    <a href="#biblio">书目</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="hero" id="hero">
+    <div class="eyebrow">PARENT WORKSHOP</div>
+    <div class="rule"></div>
+    <h1>电子产品平衡使用 · 家长工作坊</h1>
+    <div class="sub">原来你也有同样的烦恼 —— 看懂孩子为什么停不下来，一起帮他养成健康的使用习惯</div>
+    <div class="meta">
+      <span>对象：<b>中学家长</b></span>
+      <span>时长：<b>60 分钟</b></span>
+      <span>形式：<b>体验 + 讨论 + 现场工具</b></span>
+    </div>
+    <div class="agenda">
+      <h3>工作坊活动安排 · 60 分钟</h3>
+      <div class="row"><span class="t">① 8 分钟</span>热身 ·「原来你也有同样的烦恼」——家长 BINGO 找同路人</div>
+      <div class="row"><span class="t">② 10 分钟</span>平衡 · 看懂孩子 + 一天 24 小时 + 线上线下怎么配</div>
+      <div class="row"><span class="t">③ 10 分钟</span>为什么停不下来 · 内部 / 家庭 / 社会三因素</div>
+      <div class="row"><span class="t">④ 22 分钟</span>怎么养成好习惯 · 家庭公约 + 微习惯系统 + 现场填工具卡</div>
+      <div class="row"><span class="t">⑤ 10 分钟</span>收尾 · 分享「本周我要做的一条」</div>
+    </div>
+  </div>
+
+  <!-- 活动1 -->
+  <div class="sec">
+    <div class="act n1 open" id="act1">
+      <div class="a-head" onclick="this.parentElement.classList.toggle('open')">
+        <div class="a-num">1</div>
+        <div class="a-tt"><div class="t">热身 ·「原来你也有同样的烦恼」</div><div class="meta">8 分钟 · 家长 BINGO 找同路人</div></div>
+        <div class="a-ar">›</div>
+      </div>
+      <div class="a-body">
+        <div class="goal">目标：让人觉得不孤独——「管不住」的从来不止我一家，才能放心敞开心扉。</div>
+        <p class="pt">每位家长拿一张 <b>BINGO 卡</b>，起身去认识其他人：找到符合格子描述的家长，请对方在格子里签个名。<b>每个格子必须由不同的人签</b>。先连成一线（横 / 竖 / 斜）就轻声说 BINGO。</p>
+        <div class="mat bingo-mat">
+          <div class="mat-head"><span>BINGO 卡 · 找到那个同路人</span><button class="matbtn" onclick="renderBingo()">🔀 换一张新卡</button></div>
+          <div class="mat-body">
+            <div class="bingo-head">
+              <span class="bh-l">B<b></b></span><span class="bh-l">I<b></b></span><span class="bh-l">N<b></b></span><span class="bh-l">G<b></b></span><span class="bh-l">O<b></b></span>
+            </div>
+            <div class="bingo-grid" id="bingoGrid"></div>
+            <div class="bingo-tip">找到符合描述的人，请 TA 在格子里<b>签名</b> · 每人只能签一格 · 连成一线（横 / 竖 / 斜）就喊 <b>BINGO</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 活动2 -->
+  <div class="sec print-keep-day">
+    <div class="act n2" id="act2">
+      <div class="a-head" onclick="this.parentElement.classList.toggle('open')">
+        <div class="a-num">2</div>
+        <div class="a-tt"><div class="t">平衡 · 看懂孩子 + 一天 24 小时 + 线上线下</div><div class="meta">10 分钟 · 先看懂孩子，再谈屏幕</div></div>
+        <div class="a-ar">›</div>
+      </div>
+      <div class="a-body">
+        <div class="goal">目标：建立「健康平衡使用」的标准——先排好生活，再谈屏幕。</div>
+
+        <div class="subhead">核心概念 · 屏幕也要「营养均衡」——用吃饭打比方</div>
+        <p class="pt">与其纠结「能不能用」，不如问「用得平不平衡」。把孩子的活动分成三类，就像搭配一日三餐：</p>
+        <div class="diet">
+          <div class="diet-card d-offline">
+            <div class="d-ic">🍚</div>
+            <div class="d-t">线下活动 = 主食</div>
+            <div class="d-d">运动、同伴、家庭、兴趣……这是成长的根基，<b>必须占大头</b>。</div>
+          </div>
+          <div class="diet-card d-active">
+            <div class="d-ic">🥦</div>
+            <div class="d-t">在线 · 主动使用 = 优质蛋白</div>
+            <div class="d-d">有目的、有思考、有创造：学习、编程、查资料、视频通话。<b>有营养，适量吃</b>。</div>
+          </div>
+          <div class="diet-card d-passive">
+            <div class="d-ic">🍬</div>
+            <div class="d-t">在线 · 被动使用 = 甜点零食</div>
+            <div class="d-d">被算法投喂、纯接收：刷短视频、追剧、挂机。<b>偶尔可以，但不能当饭</b>。</div>
+          </div>
+        </div>
+        <p class="pt" style="margin-top:8px;">一句话标准：<b>主食够、蛋白适量、甜点限量</b>——平衡不是「零屏幕」，而是别让孩子拿零食当正餐。</p>
+
+        <div class="subhead">孩子的四个发展阶段 · 认知 / 身心 / 社交 × 电子设备</div>
+        <table class="dev-table">
+          <tr><th style="width:78px;">年龄</th><th>认知</th><th>身心</th><th>社交</th><th>电子设备情境</th></tr>
+          <tr><td class="age">0–3 岁<br>婴幼儿</td><td>语言区迅速「髓鞘化」<span class="src">屏幕时代 P13</span></td><td>大运动、感官探索飞速发展</td><td>需要<b>真实的面部互动</b>，屏幕无法替代</td><td>屏幕时间过长会<b>损害髓鞘形成</b>；屏幕 = 0，尽量延迟引入<span class="src">屏幕时代 P13-14</span></td></tr>
+          <tr><td class="age">3–6 岁<br>学龄前</td><td>想象游戏爆发，符号思维萌芽</td><td>大运动关键期，需奔跑跳跃</td><td>同伴游戏萌芽，学习轮流与规则</td><td>屏幕极少，且家长陪同</td></tr>
+          <tr><td class="age">6–12 岁<br>小学</td><td>执行功能、自控力发育中</td><td>睡眠 9–12 小时<span class="src">AASM</span></td><td>同伴关系、规则意识迅速发展</td><td><b>习惯养成黄金期</b>；教育性为主，陪伴使用<span class="src">屏幕时代 第2章</span></td></tr>
+          <tr><td class="age">12–18 岁<br>青少年</td><td><b>前额叶 24–25 岁才成熟</b>，冲动 &gt; 理性<span class="src">屏幕时代 P95</span></td><td>睡眠 8–10 小时，大脑剧烈重塑</td><td>同伴认同需求极强，对「被看见」需求极高</td><td>给自主权 + 边界：像给车钥匙，先陪练再放手</td></tr>
+        </table>
+
+        <div class="subhead">孩子的一天 24 小时怎么排</div>
+        <p class="pt">把<b>睡眠 7–8 小时（青少年建议 8–10）</b>、早饭、上学、放学、作业、睡前逐格排进 24 小时，每格标注屏幕是否可用，家长在「我家实际安排」栏填真实情况。<b>算一笔账：</b>睡眠 + 上学 + 作业 + 家庭生活之后，真正自由支配的只有 <b>约 1 小时</b>——屏幕只能从自由时间里分，不能从睡眠、作业、家庭里抢。</p>
+        <div class="mat" id="dayMat">
+          <div class="mat-head"><span>24 小时工作纸</span><span class="mat-tip">💡 用下方「排一排」改活动和时间，钟面实时更新</span></div>
+          <div class="mat-body">
+            <table class="day24">
+              <tr><th style="width:82px;">时段</th><th>这个时间在做什么</th><th style="width:96px;">屏幕？</th></tr>
+              <tr><td class="t">22:00–7:00</td><td><b>睡眠 7–8 小时</b>（青少年建议 8–10，AASM）</td><td><span class="tag no">✗ 不放</span></td></tr>
+              <tr><td class="t">7:00–7:30</td><td>起床 · 早饭</td><td><span class="tag no">✗ 建议</span></td></tr>
+              <tr><td class="t">7:30–16:00</td><td>上学</td><td><span class="tag no">✗ 校规</span></td></tr>
+              <tr><td class="t">16:00–17:00</td><td>放学后 · 运动 / 同伴 / 兴趣</td><td><span class="tag ok">✓ 15–20'</span></td></tr>
+              <tr><td class="t">17:00–19:00</td><td>作业 · 晚饭</td><td><span class="tag learn">△ 学习用</span></td></tr>
+              <tr><td class="t">19:00–20:30</td><td>家庭时间 · 面对面</td><td><span class="tag no">✗ 不放</span></td></tr>
+              <tr><td class="t">20:30–21:30</td><td><b>自由时间（屏幕主窗口）</b></td><td><span class="tag ok">✓ 30–40'</span></td></tr>
+              <tr><td class="t">21:30–22:00</td><td>洗漱 · 睡前（睡前 1 小时无屏幕）</td><td><span class="tag no">✗ 不放</span></td></tr>
+            </table>
+
+            <div class="day24pie" id="dayPieCard">
+              <svg id="dayPie" viewBox="-26 -26 272 272" role="img" aria-label="我家的一天钟面图">
+                <circle cx="110" cy="110" r="100" fill="none" stroke="#ffffff" stroke-width="1" opacity=".55"/>
+                <circle cx="110" cy="110" r="62" fill="none" stroke="#ffffff" stroke-width="1" opacity=".55"/>
+                <g id="pieSegs"></g>
+                <g><line x1="110" y1="9" x2="110" y2="-3" stroke="#5d5648" stroke-width="1.6"/><line x1="136.14" y1="12.44" x2="138.21" y2="4.71" stroke="#a89f8c" stroke-width="1"/><line x1="160.5" y1="22.53" x2="164.5" y2="15.6" stroke="#a89f8c" stroke-width="1"/><line x1="181.42" y1="38.58" x2="189.9" y2="30.1" stroke="#5d5648" stroke-width="1.6"/><line x1="197.47" y1="59.5" x2="204.4" y2="55.5" stroke="#a89f8c" stroke-width="1"/><line x1="207.56" y1="83.86" x2="215.29" y2="81.79" stroke="#a89f8c" stroke-width="1"/><line x1="211" y1="110" x2="223" y2="110" stroke="#5d5648" stroke-width="1.6"/><line x1="207.56" y1="136.14" x2="215.29" y2="138.21" stroke="#a89f8c" stroke-width="1"/><line x1="197.47" y1="160.5" x2="204.4" y2="164.5" stroke="#a89f8c" stroke-width="1"/><line x1="181.42" y1="181.42" x2="189.9" y2="189.9" stroke="#5d5648" stroke-width="1.6"/><line x1="160.5" y1="197.47" x2="164.5" y2="204.4" stroke="#a89f8c" stroke-width="1"/><line x1="136.14" y1="207.56" x2="138.21" y2="215.29" stroke="#a89f8c" stroke-width="1"/><line x1="110" y1="211" x2="110" y2="223" stroke="#5d5648" stroke-width="1.6"/><line x1="83.86" y1="207.56" x2="81.79" y2="215.29" stroke="#a89f8c" stroke-width="1"/><line x1="59.5" y1="197.47" x2="55.5" y2="204.4" stroke="#a89f8c" stroke-width="1"/><line x1="38.58" y1="181.42" x2="30.1" y2="189.9" stroke="#5d5648" stroke-width="1.6"/><line x1="22.53" y1="160.5" x2="15.6" y2="164.5" stroke="#a89f8c" stroke-width="1"/><line x1="12.44" y1="136.14" x2="4.71" y2="138.21" stroke="#a89f8c" stroke-width="1"/><line x1="9" y1="110" x2="-3" y2="110" stroke="#5d5648" stroke-width="1.6"/><line x1="12.44" y1="83.86" x2="4.71" y2="81.79" stroke="#a89f8c" stroke-width="1"/><line x1="22.53" y1="59.5" x2="15.6" y2="55.5" stroke="#a89f8c" stroke-width="1"/><line x1="38.58" y1="38.58" x2="30.1" y2="30.1" stroke="#5d5648" stroke-width="1.6"/><line x1="59.5" y1="22.53" x2="55.5" y2="15.6" stroke="#a89f8c" stroke-width="1"/><line x1="83.86" y1="12.44" x2="81.79" y2="4.71" stroke="#a89f8c" stroke-width="1"/></g>
+                <g font-family="PingFang SC,Microsoft YaHei,sans-serif"><text x="110" y="-11.5" text-anchor="middle" font-size="11" font-weight="800" fill="#3a3a3a">0点</text><text x="198.39" y="25.11" text-anchor="middle" font-size="8.5" font-weight="500" fill="#8a8271">3点</text><text x="235" y="113.5" text-anchor="middle" font-size="11" font-weight="800" fill="#3a3a3a">6点</text><text x="198.39" y="201.89" text-anchor="middle" font-size="8.5" font-weight="500" fill="#8a8271">9点</text><text x="110" y="238.5" text-anchor="middle" font-size="11" font-weight="800" fill="#3a3a3a">12点</text><text x="21.61" y="201.89" text-anchor="middle" font-size="8.5" font-weight="500" fill="#8a8271">15点</text><text x="-15" y="113.5" text-anchor="middle" font-size="11" font-weight="800" fill="#3a3a3a">18点</text><text x="21.61" y="25.11" text-anchor="middle" font-size="8.5" font-weight="500" fill="#8a8271">21点</text></g>
+                <g text-anchor="middle" font-family="PingFang SC,Microsoft YaHei,sans-serif">
+                  <text id="pieC1" x="110" y="106" font-size="22" font-weight="800" fill="#2e5290">24h</text>
+                  <text id="pieC2" x="110" y="124" font-size="10" fill="#8a8271">一天怎么分</text>
+                </g>
+              </svg>
+              <div class="pl" id="dayEditor">
+                <div class="pl-t" style="display:flex;align-items:center;justify-content:space-between;gap:8px;"><span>我家的一天 · <b>排一排</b>（改名字和时间，左边钟面实时更新）</span><button class="matbtn" onclick="document.body.classList.add('printing-sched');window.print();document.body.classList.remove('printing-sched');">🖨 只打印这块</button></div>
+                <div class="day-rows" id="dayRows"></div>
+                <button id="dayAddBtn" type="button">＋ 添加活动</button>
+                <div id="daySum"></div>
+                <div class="clock-cap">钟面读法：0 点在顶部，顺时针 = 一天 · 灰色 = 还没安排的时间</div>
+              </div>
+            </div>
+
+            <div class="redflags">
+          <h4><span class="flag-ic">🚩</span> 红旗警示信号 · 出现这些，说明电子设备使用可能已经失衡</h4>
+          <div class="flag-grid">
+            <div class="flag"><div class="fh">身体方面</div>
+              <ul>
+                <li>睡眠被挤占：熬夜刷屏、早上起不来，睡不够 8–10 小时<span class="src">屏幕时代 P42</span></li>
+                <li>眼睛干涩、频繁揉眼、视力明显下降<span class="src">屏幕时代 P14</span></li>
+                <li>久坐不动：体重变化、颈椎酸痛「短信颈」<span class="src">屏幕时代 P18</span></li>
+                <li>忘记吃饭、喝水，甚至憋尿不肯离开屏幕</li>
+              </ul>
+            </div>
+            <div class="flag"><div class="fh">心理方面</div>
+              <ul>
+                <li>拿不到屏幕就烦躁、易怒、焦虑（戒断反应）<span class="src">屏幕时代 P74</span></li>
+                <li>需要越来越长时间才满足（耐受）<span class="src">屏幕时代 P74</span></li>
+                <li>用完感觉空虚、内疚、更糟<span class="src">屏幕时代 P197</span></li>
+                <li>对现实爱好失去兴趣，只想刷屏</li>
+                <li>撒谎、隐瞒真实使用时间</li>
+              </ul>
+            </div>
+            <div class="flag"><div class="fh">社交方面</div>
+              <ul>
+                <li>现实朋友越来越少，朋友「只在网上」<span class="src">屏幕时代 P149</span></li>
+                <li>吃饭、和家人聊天时也放不下屏幕</li>
+                <li>因「怕错过」而焦虑、不敢下线（FOMO）<span class="src">屏幕时代 P51</span></li>
+                <li>网上卷入冲突/被霸凌，或与陌生人过度交流</li>
+                <li>拒绝线下活动，逃避面对面场合</li>
+              </ul>
+            </div>
+          </div>
+          <div class="flag-note">出现任意 2–3 条红旗，就值得停下来和孩子一起回到「24 小时」重新排；持续多条、且越来越严重，建议寻求学校心理老师或专业帮助。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+    </div><!-- /act2 -->
+  </div><!-- /sec print-keep-day -->
+
+  <!-- 活动3 -->
+  <div class="sec">
+    <div class="act n3" id="act3">
+      <div class="a-head" onclick="this.parentElement.classList.toggle('open')">
+        <div class="a-num">3</div>
+        <div class="a-tt"><div class="t">为什么停不下来 · 三个因素</div><div class="meta">10 分钟 · 不是孩子意志力差，是三股力量在拉扯</div></div>
+        <div class="a-ar">›</div>
+      </div>
+      <div class="a-body">
+        <div class="goal">目标：把「孩子贪玩、意志力差」的责备，换成「原来是三股力量在拉扯」的理解。</div>
+        <div class="factor">
+          <div class="f int"><h4>内部因素 · 孩子自身</h4>
+            <ul>
+              <li>大脑还没长好：前额叶到 <b>24–25 岁才成熟</b><span class="s">〔屏幕时代 P95-96〕</span></li>
+              <li>大脑偏爱<b>新颖、冒险、同伴赞赏</b><span class="s">〔屏幕时代 P6〕</span></li>
+              <li>多巴胺在「渴望」阶段释放<span class="s">〔掌控习惯 第8章〕</span></li>
+            </ul>
+          </div>
+          <div class="f fam"><h4>家庭因素 · 环境与榜样</h4>
+            <ul>
+              <li>父母<b>双标</b>：自己刷不停却要求孩子<span class="s">〔屏幕时代 P44〕</span></li>
+              <li>环境设计缺失：手机随手可得<span class="s">〔掌控习惯 第6章〕</span></li>
+              <li>用科技当<b>情绪安抚剂</b><span class="s">〔屏幕时代 第2章〕</span></li>
+              <li>缺共识公约<span class="s">〔鼎石协议〕</span></li>
+            </ul>
+          </div>
+          <div class="f soc"><h4>社会因素 · 设计与同伴</h4>
+            <ul>
+              <li>科技公司的<b>成瘾设计</b>：可变奖励、无限下拉、点赞循环、通知轰炸<span class="s">〔屏幕时代 P48-56〕</span></li>
+              <li><b>6 大上瘾钩子</b><span class="s">〔欲罢不能〕</span></li>
+              <li>同伴压力 FOMO：怕错过、怕被孤立<span class="s">〔屏幕时代 P51〕</span></li>
+              <li>注意力经济：数据 = 新石油<span class="s">〔屏幕时代 第1章〕</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="subhead">科技公司的成瘾设计 · 12 张钩子卡</div>
+        <div class="mat">
+          <div class="mat-head"><span>看懂这 12 招，你就懂了孩子为什么停不下来</span></div>
+          <div class="mat-body"><div class="hooks" id="hooksGrid"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 活动4 -->
+  <div class="sec print-keep">
+    <div class="act n4" id="act4">
+      <div class="a-head" onclick="this.parentElement.classList.toggle('open')">
+        <div class="a-num">4</div>
+        <div class="a-tt"><div class="t">怎么养成好习惯 · 公约 + 完整周期</div><div class="meta">22 分钟 · 大方向定公约，小步子走完习惯周期</div></div>
+        <div class="a-ar">›</div>
+      </div>
+      <div class="a-body">
+        <div class="goal">目标：从「定身份」开始，走完整个习惯养成周期——先定家庭公约这个大方向，再用六步微习惯系统落地，让家长带走一套可执行的工具。</div>
+
+        <div class="subhead">第一步 · 大方向：家庭电子设备公约（7 个话题）</div>
+        <a class="gongyue-link" href="family-agreement-site.html" target="_blank" rel="noopener">📄 打开完整《家庭电子设备公约》填写向导 →</a>
+        <div class="step-list" id="agreeList"></div>
+
+        <div class="subhead">第二步 · 小步子：习惯养成完整周期</div>
+        <div class="thesis">
+          <b>核心原理：改变不是从「目标」开始，而是从「身份」开始。</b>
+          不要问孩子「你想达到什么结果」，而要问「你想成为什么样的人」——然后让每一个小习惯，成为给这个身份投下的一票。
+          <span class="en">"Every action you take is a vote for the type of person you wish to become."</span>
+        </div>
+
+        <div class="cycle">
+          <div class="cnode cn1"><div class="st">第 1 步</div><div class="big">定身份</div><div class="en">Identity</div></div>
+          <span class="carrow">→</span>
+          <div class="cnode cn2"><div class="st">第 2 步</div><div class="big">投第一票</div><div class="en">Small Win</div></div>
+          <span class="carrow">→</span>
+          <div class="cnode cn3"><div class="st">第 3 步</div><div class="big">搭系统</div><div class="en">4 Laws</div></div>
+          <span class="carrow">→</span>
+          <div class="cnode cn4"><div class="st">第 4 步</div><div class="big">追踪</div><div class="en">Track</div></div>
+          <span class="carrow">→</span>
+          <div class="cnode cn5"><div class="st">第 5 步</div><div class="big">内化</div><div class="en">Automate</div></div>
+          <span class="carrow">→</span>
+          <div class="cnode cn6"><div class="st">第 6 步</div><div class="big">升级</div><div class="en">Next Loop</div></div>
+        </div>
+        <div class="cycle-note">🔁 <b>习惯养成周期</b>：定身份 → 投第一票 → 搭系统 → 追踪 → 内化 → 升级（新身份，进入下一个循环）</div>
+
+        <div id="stepList"></div>
+
+        <div class="subhead">家长的角色：命令，还是协助？</div>
+        <table class="compare">
+          <thead><tr><th style="width:96px;">场景</th><th>❌ 命令式（让孩子服从）</th><th>✓ 身份式协助（让孩子成为）</th></tr></thead>
+          <tbody id="compareBody"></tbody>
+        </table>
+
+        <div class="subhead">第三步 · 现场工具：填完带走（30 天打卡表）</div>
+        <div class="mat" id="toolkitCard">
+          <div class="mat-head"><span>我的身份宣言 + 微习惯计划 + 打卡表</span><button class="matbtn" onclick="document.body.classList.add('printing-toolkit');window.print();document.body.classList.remove('printing-toolkit');">🖨 单独打印这张</button></div>
+          <div class="mat-body">
+            <div class="identity-tpl">我是一个 <span class="ib"></span> 的人。</div>
+            <p style="font-size:11px;color:var(--ink2);margin-top:6px;">例：「我是一个能管好自己屏幕的人」／「我是一个睡前把手机交给睡眠的人」。</p>
+
+            <div class="toolkit-field"><div class="lab">我的第一个微行为（小到不可能失败）：</div><span class="blank"></span></div>
+            <p style="font-size:11px;color:var(--ink2);">例：「睡前把手机放进客厅充电站」「每天用学习 App 做一道题」。</p>
+
+            <div class="toolkit-field"><div class="lab">让它<b style="color:#3d6b8f">显而易见</b>（放哪里能看到）：</div><span class="blank"></span></div>
+            <div class="toolkit-field"><div class="lab">让它<b style="color:#7d5ba6">有吸引力</b>（和什么喜欢的事绑定）：</div><span class="blank"></span></div>
+            <div class="toolkit-field"><div class="lab">让它<b style="color:#4a7c59">简便易行</b>（两分钟版本）：</div><span class="blank"></span></div>
+            <div class="toolkit-field"><div class="lab">让它<b style="color:#b07d3a">令人愉悦</b>（完成后的即时奖励）：</div><span class="blank"></span></div>
+
+            <div class="chart-head">我的微习惯（每天，小到不可能失败）：<span class="ib"></span></div>
+            <div id="chartBox"></div>
+            <div class="chart-tip">✅ = 做到了底线（哪怕只做了一下）。<b>漏一天没关系，别漏两次</b>——留空第二天接着勾。孩子签名：＿＿＿＿　家长签名：＿＿＿＿　日期：＿＿＿＿</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 书目索引 -->
+  <div class="sec" id="biblio">
+    <div class="sec-head" style="text-align:center;margin-bottom:14px;">
+      <div class="eyebrow">REFERENCES</div>
+      <h2 style="font-family:'Songti SC',serif;font-size:24px;margin:6px 0;">书目与资料索引</h2>
+    </div>
+    <div class="biblio">
+      <div class="b"><b>1. 《屏幕时代，重塑孩子的自控力》</b> 希米·康（Dr. Shimi Kang）· 上海社会科学院出版社 2023<br><span class="used">用于：活动2 大脑发育 / 活动3 内部因素、成瘾设计（可变奖励、点赞循环、FOMO、注意力经济）</span></div>
+      <div class="b"><b>2. 《掌控习惯》Atomic Habits</b> 詹姆斯·克利尔（James Clear）· 北京联合出版公司<br><span class="used">用于：活动4 六步周期、四定律、习惯追踪 / 活动3 多巴胺渴望阶段</span></div>
+      <div class="b"><b>3. 《欲罢不能》</b> 亚当·阿尔特（Adam Alter）<br><span class="used">用于：活动3 社会因素 · 6 大上瘾钩子</span></div>
+      <div class="b"><b>4. 鼎石学校《家庭电子产品使用协议》</b>（Family Tech Agreement）<br><span class="used">用于：活动4 家庭公约七话题 / 活动3 家庭因素</span></div>
+      <div class="b"><b>5. 美国睡眠医学学会（AASM）睡眠建议</b><br><span class="used">用于：活动2 各年龄段睡眠时长</span></div>
+      <div class="b"><b>6. Dr. Shimi Kang「My Tech Diet」工作单</b><br><span class="used">用于：活动2/4 三类科技（有害/糖分/健康）+「用后感受」判断标准</span></div>
+    </div>
+  </div>
+
+  <footer>
+    <b>电子产品平衡使用 · 家长工作坊</b> · 60 分钟 · 四场活动<br>
+    教育科技创新教师 张宁 &amp; 心理辅导老师 韦明珠 联合主讲<br>
+    目标不是让孩子远离科技，而是陪他们学会更自主、更平衡、更健康地使用科技。
+  </footer>
+</div>
+
+<div class="printbar"><button onclick="window.print()">🖨 打印 / 存 PDF</button></div>
+
+<script>
+/* ===== 数据 ===== */
+const BINGO_ST=[
+ '自己也刷短视频刷到过停不下来','因为「再玩五分钟」和孩子拉锯过','立过屏幕规矩但没坚持几天',
+ '睡前会忍不住看手机','担心孩子用 AI 写作业','孩子吃饭时也放不下手机',
+ '说过「我小时候也总想玩」','觉得家长自己也得少刷手机','和孩子因为手机吵过架',
+ '不知道孩子在网上和谁聊天','试过没收手机，但效果不好','孩子房间里有平板或电脑',
+ '担心孩子的睡眠被屏幕挤掉','晚上全家手机在卧室充电','孩子有游戏的连胜或段位',
+ '自己也设过屏幕使用时间','孩子说过「同学都有手机」','想过「完全禁止」又觉得不现实',
+ '孩子写作业时手机就在旁边','周末想出去却各自刷屏','听过孩子说「再一局就停」',
+ '家里还没有正式的屏幕公约','担心孩子的视力下降','孩子用视频通话和长辈联系',
+ '愿意和孩子一起改一条习惯'
+];
+
+const HOOKS=[
+ {t:'老虎机效应',pg:'P54',why:'斯金纳的鸽子：奖励不按固定时间出现，反而让人更疯狂。刷新、抽卡、开箱就是这招，多巴胺狂飙。',fix:'把「随机惊喜」换成固定时间的真实活动。'},
+ {t:'点赞 · 反馈循环',pg:'P48',why:'点赞是「社交肯定的提示音」，发帖→点赞→想再发。孩子开始用点赞数衡量自己的价值。',fix:'教孩子「点赞≠价值」，补足线下真实的认可。'},
+ {t:'无限下拉 · 没有终点',pg:'P72',why:'内容永远加载不完，没有「结束」的信号，说好看 10 分钟就滑了 1 小时。',fix:'给孩子外在终点：「看到第 N 条就停」。'},
+ {t:'通知轰炸 · 已读回执',pg:'P52,56',why:'红点、提示音利用「社交相互性」，不回复显得失礼，孩子被一次次拽回手机。',fix:'关掉非必要通知，设固定查看时间。'},
+ {t:'自动播放',pg:'P72',why:'一个视频结束自动接下一个，不给你「要不要停」的决策点。',fix:'关闭自动连播，每次播放都要主动点击。'},
+ {t:'升级 · 连胜 · 排位',pg:'P47,86',why:'硬币、现金箱、段位、连胜——精心策划的奖励刺激多巴胺，「差一局」正是设计。',fix:'读懂「差一点」，用真实成就替代虚拟段位。'},
+ {t:'发帖后的焦虑',pg:'P53',why:'发帖后焦虑等点赞，没人点赞就难堪——像「老虎机+人气榜」。',fix:'少发多聊，真朋友私下联系。'},
+ {t:'FOMO · 怕错过',pg:'P51',why:'「朋友都上线了，我不上像被抛弃」——用归属感把你焊在屏幕上。',fix:'帮孩子在线下找到真实归属。'},
+ {t:'数据 = 新石油',pg:'第1章',why:'免费 App 靠卖数据和注意力赚钱。你的注意力就是产品。',fix:'让孩子明白「免费」的代价。'},
+ {t:'偏爱新颖性',pg:'P6',why:'青少年大脑天生偏爱新颖、冒险、同伴赞赏，产品照着这套「源代码」设计。',fix:'理解这是发育，用新奇的真实活动替代。'},
+ {t:'肖恩·帕克的告白',pg:'P69',why:'Facebook 创始总裁承认：设计初衷是「占据最多时间」，漏洞在于人脑。乔布斯、盖茨都限制自己孩子。',fix:'连设计者都在限制孩子，你也可以。'},
+ {t:'悬念与红点',pg:'P6,51',why:'未读、剧集悬念制造「未完成」的焦虑，孩子总想「看完这一集」「清掉红点」。',fix:'接受「未完成」，主动留悬念。'}
+];
+
+const STEPS=[
+{num:'01',title:'定身份',en:'Decide who you want to become',
+ q:'「目标关乎你想达到的结果，系统关乎你成为的人。」',
+ blk:[
+  {t:'原理（第 2 章）',p:'改变有三层：<b>结果</b>（我想少玩手机）→ <b>过程</b>（我每天定时收手机）→ <b>身份</b>（我是能管好屏幕的人）。大多数人从外到内改，很难持久；真正的改变<b>由内而外</b>，从身份开始。'}],
+ do:'<b>家长怎么做：</b>不要问孩子「你要什么结果」，问「你想成为什么样的人」。帮孩子把目标重写成身份宣言——「我要少玩手机」是目标；「我是一个能管好自己屏幕的人」是身份。',
+ eg:'<b>例子：</b>「我要戒掉刷短视频」（目标）→「我是一个能管好自己屏幕的人」（身份）→ 这样的人自然会放下手机、主动选择健康的使用方式。身份一旦确立，行为会自动跟上来。'},
+
+{num:'02',title:'投第一票',en:'Cast the first vote (two-minute rule)',
+ q:'「先让习惯入门，再让它变大。」',
+ blk:[
+  {t:'原理（第 13 章 两分钟法则）',p:'习惯靠<b>重复的次数</b>形成，不靠单次做得多少。把新习惯缩小到<b>两分钟内能完成</b>——小到不可能失败，才能日复一日。'}],
+ do:'<b>家长怎么做：</b>只要求孩子「投第一票」，不要求马上做好。做一下，就给这个身份投了一票。允许做得烂，但不允许缺席。',
+ eg:'<b>例子：</b>「少玩手机」→ 缩成「睡前把手机放进客厅充电站」（只做放手机这一个动作）；「健康使用」→ 缩成「每天用学习 App 做一道题」。'},
+
+{num:'03',title:'搭系统',en:'Build the system (four laws)',
+ q:'「问题不在孩子，在于系统。」',
+ blk:[
+  {t:'原理（第 4–14 章 四定律）',p:'用<b style="color:#3d6b8f">让它显而易见</b> · <b style="color:#7d5ba6">让它有吸引力</b> · <b style="color:#4a7c59">让它简便易行</b> · <b style="color:#b07d3a">让它令人愉悦</b> 四条定律，搭建一套「让好习惯自动发生、坏习惯自动变难」的系统。用系统，而不是意志力。'}],
+ laws:[
+  {name:'第一定律 · 让它显而易见',en:'Make it obvious',c:'#3d6b8f',items:[
+    {m:'记录你现有的习惯，觉察它们',d:'列出孩子一天里所有碰屏幕的行为清单'},
+    {m:'执行意图：「我将在[时间]在[地点]做[行为]」',d:'「我将在晚上 8:30 在客厅和奶奶视频通话 10 分钟」'},
+    {m:'习惯叠加：「在[当前习惯]之后，我将[新习惯]」',d:'「做完作业之后，我用平板读 15 分钟电子书」；「进门之后，我把手机放进玄关小篮子」'},
+    {m:'设计环境，让好习惯的提示清晰可见',d:'学习 App 放首屏、平板摊开放在书桌、充电站设在卧室外'}]},
+  {name:'第二定律 · 让它有吸引力',en:'Make it attractive',c:'#7d5ba6',items:[
+    {m:'诱惑捆绑：把想做的事和需要做的事配对',d:'只有用记单词 App 时，才听最喜欢的歌单'},
+    {m:'加入「你想要的行为是常态」的群体',d:'加入编程学习群、在线读书打卡群、学习小组'},
+    {m:'激励仪式：困难前先做一件喜欢的事',d:'开始在线学习前，先做三次深呼吸、整理书桌'}]},
+  {name:'第三定律 · 让它简便易行',en:'Make it easy',c:'#4a7c59',items:[
+    {m:'减少阻力：缩短与好习惯之间的步骤',d:'平板充电器就插在书桌边，学习 App 设为免登录'},
+    {m:'预先准备环境，让未来行动更轻松',d:'睡前把第二天的在线课页面打开'},
+    {m:'把握关键决策点：优化影响巨大的小选择',d:'「进门那一刻」决定手机放玄关，「写作业前」决定手机交出来'},
+    {m:'两分钟法则：缩小到两分钟内能开始',d:'「我只打开学习 App 做一道题」'},
+    {m:'自动化习惯：成为每天打卡的动作',d:'设屏幕使用时间上限、设「健康使用」每日提醒'}]},
+  {name:'第四定律 · 让它令人愉悦',en:'Make it satisfying',c:'#b07d3a',items:[
+    {m:'即时强化：完成后立即奖励',d:'每完成一次健康使用，就在打卡表贴一颗星'},
+    {m:'习惯追踪器：记录连续天数，别断链',d:'打卡表记录「连续 X 天健康使用」'},
+    {m:'绝不错过两次：忘记时立即回到正轨',d:'昨天没做到，今天立刻接上，不连续漏两天'}]},
+ ],
+ badlaws:[
+  {name:'反用第一定律 · 让它不可见',en:'Make it invisible',c:'#a05252',items:[
+    {m:'减少接触：移除坏习惯的触发线索',d:'删掉最上瘾的 App、开启灰度屏幕、学习时手机放进抽屉'}]},
+  {name:'反用第二定律 · 让它失去吸引力',en:'Make it unattractive',c:'#a05252',items:[
+    {m:'重构思维：强调停止坏习惯的好处',d:'「每刷一分钟，就偷走一分钟未来的自己」，把刷完的疲惫/内疚写下来贴书桌旁'}]},
+  {name:'反用第三定律 · 让它难以施行',en:'Make it difficult',c:'#a05252',items:[
+    {m:'增加阻力：增加与坏习惯之间的步骤',d:'用 App 限制工具（Forest、Freedom），密码由家长设置'},
+    {m:'承诺机制：限制未来选择，只留有益选项',d:'向老师宣布一个 30 天「不刷视频」挑战'}]},
+  {name:'反用第四定律 · 让它令人不悦',en:'Make it unsatisfying',c:'#a05252',items:[
+    {m:'问责伙伴：请他人监督你的行为',d:'让好朋友每天检查，破例就「欠」对方一条手写知识'},
+    {m:'习惯契约：公开坏习惯的代价',d:'和家长签协议，重新装回 App 就捐一周零花钱'},
+    {m:'让「无所事事」变得愉快：看到不做的益处',d:'记录「今天没刷视频，多出的 40 分钟」去了哪里'}]},
+ ],
+ do:'<b>家长怎么做：</b>你不是监督者，是<b>环境设计师</b>。帮孩子改造环境：让好习惯的提示看得见、做起来容易、做完有回馈；让坏习惯的提示消失、做起来麻烦、做了有代价。',
+ eg:'<b>例子：</b>想让孩子少刷手机 → 手机晚上在卧室外充电（坏习惯难以做到）；想让孩子多学习 → 平板摊开放在书桌（好习惯显而易见）。'},
+
+{num:'04',title:'追踪',en:'Track the habit',
+ q:'「追踪，让不可见的进步变得可见。」',
+ blk:[
+  {t:'原理（第 16 章 习惯追踪）',p:'记录完成情况本身就是一种即时奖励。坚持「<b>别断链</b>」——连续记录会形成「不想断」的心理；「<b>别漏两次</b>」——漏一天是意外，连续漏两天就是新坏习惯的开端。'}],
+ do:'<b>家长怎么做：</b>和孩子一起贴一张打卡表在冰箱上，睡前打钩。漏了<b>不批评</b>，只说「别漏两次，明天接着来」。看见连续，比任何说教都有力量。',
+ eg:'<b>例子：</b>「连续 7 天睡前把手机放客厅」的钩越连越长，孩子自己都不舍得断。'},
+
+{num:'05',title:'内化',en:'The habit becomes automatic',
+ q:'「习惯是好的仆人，却是坏的主人。」',
+ blk:[
+  {t:'原理（第 2 章 习惯养成的标志）',p:'怎么知道习惯养成了？四个信号：① 不再抵触 ② 「这就是我」的身份认同 ③ 做的时候不需要思考 ④ 不再担心自己做不到。到这一步，习惯已经写进了身份。'}],
+ do:'<b>家长怎么做：</b>观察这四个信号。一旦孩子「不用提醒就主动做」了，立刻庆祝——帮他确认「你已经做到了，你就是那个人」。',
+ eg:'<b>例子：</b>孩子某天没等提醒，自己把手机放进客厅充电站——这一刻，比任何奖励都值得庆祝。'},
+
+{num:'06',title:'升级',en:'Start the next loop',
+ q:'「你成了什么人，就做什么事；做什么事，就成什么人。」',
+ blk:[
+  {t:'原理（身份螺旋上升）',p:'习惯内化后，反过来强化身份；新身份又催生新习惯——一个螺旋上升的循环。同时要保持<b>身份灵活</b>：别让「我是 XX 的人」变成僵化的标签，阻碍继续成长。'}],
+ do:'<b>家长怎么做：</b>一个习惯稳固了，就和孩子一起定下一个身份、下一个微习惯，进入新一轮循环。定期回顾：哪些习惯该保留、升级，还是放弃。',
+ eg:'<b>例子：</b>从「能管好自己屏幕」→「是一个自律的学习者」→ 开始养「每天用平板读一页电子书」的下一个习惯。'}
+];
+
+const COMPARE=[
+ {sc:'没做到时',bad:'「你又超时了！说好看 20 分钟结果玩了一小时，手机没收一星期！」',good:'「一个能管好自己屏幕的人，下次会怎么提醒自己到点停下来？」'},
+ {sc:'定规则时',bad:'「从今天起手机归我管，每天只准玩 20 分钟。」',good:'「我们一起设计一个让『到点就停』更容易发生的环境，好不好？」'},
+ {sc:'定目标时',bad:'「期末考进前十，不然手机别想碰。」',good:'「你想成为一个什么样的屏幕使用者？我们现在做的，是不是在走向他？」'},
+ {sc:'坚持了几天又破功',bad:'「果然又是三分钟热度，手机别想再碰了。」',good:'「漏一天没关系，别漏两次——明天接着把手机放进充电站。」'},
+ {sc:'奖励时',bad:'「今天表现好，奖励你多玩半小时游戏。」',good:'「做到了——你离『能管好屏幕的人』又近了一步。」'},
+ {sc:'做榜样',bad:'「我是大人，我刷一会儿怎么了？你不行。」',good:'「我也在改一条我的屏幕习惯，我们互相监督，看谁先做到。」'},
+ {sc:'熬夜刷手机',bad:'「再让我抓到半夜刷，手机直接砸了！」',good:'「一个爱惜自己睡眠的人，睡前会把手机放在哪里？」'},
+ {sc:'写作业偷玩',bad:'「你又骗我！作业呢？手机拿来！」',good:'「一个自律的学习者，会怎么安排『先作业还是先玩』的顺序？」'},
+ {sc:'「再玩五分钟」',bad:'「不行就是不行！现在立刻放下手机！」',good:'「到点了。你是想现在自己放下手机，还是设个闹钟再玩一局就停？」'},
+ {sc:'藏手机/删记录',bad:'「你还学会藏了？！看我不把门锁了！」',good:'「你藏手机，说明你自己也知道这样不好——我们换个『不用藏』的办法，好吗？」'},
+ {sc:'「同学都有手机」',bad:'「别人有你就得有？你怎么不比学习！」',good:'「你在意的不是手机，是和朋友一样、不被落下——我们聊聊这个，好吗？」'},
+ {sc:'游戏输了发脾气',bad:'「玩不起就别玩！再砸就永远别碰！」',good:'「输了的挫败感很真实。一个能管理情绪的人，会怎么处理这份火气？」'},
+ {sc:'刷视频停不下来',bad:'「再刷我卸了你所有 App！」',good:'「刷完你感觉更好还是更糟？我们一起把那个『停不下来』的钩子拆掉，好吗？」'},
+ {sc:'网上和人吵架',bad:'「你一天到晚在网上惹事！手机没收！」',good:'「在网上说话，也要当个让人尊重的人——我们看看怎么处理，好吗？」'},
+ {sc:'用 AI 写作业',bad:'「你这是作弊！就知道偷懒！」',good:'「AI 是工具不是替身。一个真想学好的人，会怎么用它帮自己，而不是代替自己？」'},
+ {sc:'睡前要手机陪睡',bad:'「不行！手机放外面！没得商量！」',good:'「一个想睡好觉、明天精神好的人，会让手机睡在卧室里还是卧室外？」'},
+ {sc:'吃饭时看手机',bad:'「吃饭不许看手机！放下！跟你说话呢！」',good:'「一个珍惜和家人相处的人，吃饭时会把眼睛放在哪里？」'},
+ {sc:'假期整天玩平板',bad:'「整个假期就知道抱着平板！别玩了！」',good:'「一个会安排自己生活的人，假期除了屏幕，还会给自己排点什么？」'},
+ {sc:'偷偷装回 App',bad:'「你又装回来了！说话不算数！」',good:'「装回来没关系。重要的是你当初为什么想删它？那个理由现在还在吗？」'},
+ {sc:'「凭什么你能玩手机」',bad:'「因为我是你爸/妈！我说了算！手机拿来！」',good:'「你说得对，公平很重要——从今天起，全家一起守同一条屏幕约定，好不好？」'}
+];
+
+const AGREE=[
+ {n:'1',t:'时间与地点',p:'设备在公共空间使用、不关门；共同定晚上关机时间；卧室外设充电站。'},
+ {n:'2',t:'如何跟进（奖与惩）',p:'约定「出色使用」和「不当使用」各自的后果，全家共识。'},
+ {n:'3',t:'使用与监督',p:'家长负责监督校外使用，可随时检查设备。'},
+ {n:'4',t:'隐私与密码',p:'家长掌握账号密码，监督网络交流，孩子不得装 VPN。'},
+ {n:'5',t:'在线安全',p:'不向陌生人透露信息，创建账户须家长同意，遇不当内容立即汇报。'},
+ {n:'6',t:'保养与维修',p:'放保护袋、双手持机、防水防摔，明确损坏后怎么办。'},
+ {n:'7',t:'数字公民意识',p:'不乱发信息、传图须同意、不用伤害性语言、为被霸凌者挺身而出。'}
+];
+
+/* ===== 渲染 ===== */
+function el(t,c,h){const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e;}
+function shuffle(a){const b=a.slice();for(let i=b.length-1;i>0;i--){const j=(Math.random()*(i+1))|0;[b[i],b[j]]=[b[j],b[i]];}return b;}
+
+function renderBingo(){
+  const grid=document.getElementById('bingoGrid');
+  const arr=shuffle(BINGO_ST).slice(0,25);
+  grid.innerHTML='';
+  arr.forEach((s,i)=>{
+    const c=el('div','bingo-cell');
+    c.appendChild(el('div','num',(i+1)));
+    c.appendChild(el('div','txt',s));
+    c.appendChild(el('div','sign','签名'));
+    grid.appendChild(c);
+  });
+}
+function renderHooks(){
+  const g=document.getElementById('hooksGrid');
+  HOOKS.forEach(h=>{
+    const d=el('div','hook');
+    d.appendChild(el('h5','',h.t+' <span style="color:#9aa3b2;font-size:9px;">'+h.pg+'</span>'));
+    d.appendChild(el('div','why',h.why));
+    d.appendChild(el('div','fix',h.fix));
+    g.appendChild(d);
+  });
+}
+function renderSteps(){
+  const list=document.getElementById('stepList');
+  STEPS.forEach(s=>{
+    const st=el('div','step');
+    const head=el('div','s-head');
+    head.appendChild(el('div','snum',s.num));
+    head.appendChild(el('div','stt',s.title+'<span class="en">'+s.en+'</span>'));
+    head.appendChild(el('div','ar','›'));
+    head.onclick=()=>st.classList.toggle('open');
+    st.appendChild(head);
+    const body=el('div','s-body');
+    body.appendChild(el('div','q','「'+s.q+'」'));
+    s.blk.forEach(b=>{
+      body.appendChild(el('div','blk','<h4>'+b.t+'</h4><p>'+b.p+'</p>'));
+    });
+    if(s.laws){
+      body.appendChild(el('div','law-head','— 养成好习惯 · 四定律（15 条）—'));
+      s.laws.forEach(L=>{
+        const lw=el('div','law-sub');
+        lw.appendChild(el('div','lh',L.name+'<span class="en">'+L.en+'</span>')).style.background=L.c;
+        L.items.forEach(it=>{
+          lw.appendChild(el('div','item','<b>'+it.m+'</b><span class="d">'+it.d+'</span>'));
+        });
+        body.appendChild(lw);
+      });
+      body.appendChild(el('div','law-head','— 戒掉坏习惯 · 反转四定律（7 条）—'));
+      s.badlaws.forEach(L=>{
+        const lw=el('div','law-sub');
+        lw.appendChild(el('div','lh',L.name+'<span class="en">'+L.en+'</span>')).style.background=L.c;
+        L.items.forEach(it=>{
+          lw.appendChild(el('div','item','<b>'+it.m+'</b><span class="d">'+it.d+'</span>'));
+        });
+        body.appendChild(lw);
+      });
+    }
+    body.appendChild(el('div','do',s.do));
+    body.appendChild(el('div','eg',s.eg));
+    st.appendChild(body);
+    list.appendChild(st);
+  });
+}
+function renderCompare(){
+  const box=document.getElementById('compareBody');
+  COMPARE.forEach(r=>{
+    const tr=el('tr');
+    tr.appendChild(el('td','sc',r.sc));
+    tr.appendChild(el('td','bad','<b>'+r.bad+'</b>'));
+    tr.appendChild(el('td','good','<b>'+r.good+'</b>'));
+    box.appendChild(tr);
+  });
+}
+function renderList(boxId,arr){
+  const box=document.getElementById(boxId);
+  arr.forEach(it=>{
+    const d=el('div','step-item');
+    d.appendChild(el('span','sn',it.n));
+    const b=el('b','',it.t);
+    d.appendChild(b);
+    if(it.p)d.appendChild(el('p','',it.p));
+    box.appendChild(d);
+  });
+}
+function renderChart(){
+  const box=document.getElementById('chartBox');
+  const tbl=el('table','chart-grid');
+  for(let r=0;r<5;r++){
+    const tr=el('tr');
+    for(let c=0;c<6;c++){
+      const td=el('td');
+      td.appendChild(el('div','d',r*6+c+1));
+      td.appendChild(el('div','box'));
+      tr.appendChild(td);
+    }
+    tbl.appendChild(tr);
+  }
+  box.appendChild(tbl);
+}
+
+renderBingo();
+renderHooks();
+renderSteps();
+renderCompare();
+renderList('agreeList',AGREE);
+renderChart();
+
+/* ===== 我家的一天 · 24小时排程编辑器 ===== */
+var TAG_META={no:{t:'✗ 不放屏',c:'#8a7f6a'},ok:{t:'✓ 屏幕',c:'#5e8c6a'},learn:{t:'△ 学习用',c:'#a06a14'},free:{t:'★ 自由窗口',c:'#a02c2c'}};
+var PALETTE=['#2e5290','#6e9e86','#d99a3e','#a9b8d1','#5e8c6a','#a02c2c','#c4b287','#8a6fae','#4f81a8','#c98a6a','#b0757e','#7d9bb5'];
+var dayRows=[
+ {n:'睡眠',s:'22:00',e:'7:00',tag:'no',c:'#2e5290'},
+ {n:'起床 · 早饭',s:'7:00',e:'7:30',tag:'no',c:'#cbb98a'},
+ {n:'上学',s:'7:30',e:'16:00',tag:'no',c:'#a9b8d1'},
+ {n:'放学后 · 运动/兴趣',s:'16:00',e:'17:00',tag:'ok',c:'#6e9e86'},
+ {n:'作业 · 晚饭',s:'17:00',e:'19:00',tag:'learn',c:'#d99a3e'},
+ {n:'家庭时间 · 面对面',s:'19:00',e:'20:30',tag:'no',c:'#5e8c6a'},
+ {n:'自由时间（屏幕主窗口）',s:'20:30',e:'21:30',tag:'ok',c:'#a02c2c'},
+ {n:'洗漱 · 睡前',s:'21:30',e:'22:00',tag:'no',c:'#c4b287'}
+];
+function tm(v){if(!v||v.indexOf(':')<0)return null;var p=v.split(':');var h=+p[0],m=+p[1];if(isNaN(h)||isNaN(m))return null;return h*60+m;}
+function rowValid(r){return tm(r.s)!==null&&tm(r.e)!==null;}
+function fmt(min){min=((min%1440)+1440)%1440;var h=Math.floor(min/60),m=min%60;return (h<10?'0':'')+h+':'+(m<10?'0':'')+m;}
+function rowSpan(r){var s=tm(r.s),e=tm(r.e);if(s===null||e===null)return 0;if(e<=s)e+=1440;return e-s;}
+function mk(t){return document.createElementNS('http://www.w3.org/2000/svg',t);}
+function pieArc(a0,span){
+  var R=100,ri=62,cx=110,cy=110,a1=a0+span;
+  function p(t,r){var rad=t*Math.PI/180;return [cx+r*Math.sin(rad),cy-r*Math.cos(rad)];}
+  var p0=p(a0,R),p1=p(a1,R),p2=p(a1,ri),p3=p(a0,ri);
+  var la=span>180?1:0;
+  return 'M'+p0[0].toFixed(2)+','+p0[1].toFixed(2)+' A'+R+','+R+' 0 '+la+' 1 '+p1[0].toFixed(2)+','+p1[1].toFixed(2)+' L'+p2[0].toFixed(2)+','+p2[1].toFixed(2)+' A'+ri+','+ri+' 0 '+la+' 0 '+p3[0].toFixed(2)+','+p3[1].toFixed(2)+' Z';
+}
+function hStr(min){var h=min/60;return (h%1===0? h : h.toFixed(1))+'h';}
+function renderDayPie(){
+  var g=document.getElementById('pieSegs');if(!g)return;
+  while(g.firstChild)g.removeChild(g.firstChild);
+  var invalid=0;
+  var ivs=dayRows.map(function(r,i){var s=tm(r.s),e=tm(r.e);if(s===null||e===null){invalid++;return {r:r,i:i,span:-1};}if(e<=s)e+=1440;return {r:r,i:i,s:s,e:e,span:e-s};});
+  ivs=ivs.filter(function(o){return o.span>=0;});
+  ivs.sort(function(a,b){return a.s-b.s;});
+  ivs.forEach(function(o){if(o.span<=0)return;
+    var p=mk('path');p.setAttribute('d',pieArc(o.s/1440*360,o.span/1440*360));p.setAttribute('fill',o.r.c);
+    var tt=mk('title');tt.textContent=o.r.n+'　'+o.r.s+'–'+o.r.e+' · '+hStr(o.span);p.appendChild(tt);
+    p.addEventListener('click',function(ev){ev.stopPropagation();showCenter(o);});
+    g.appendChild(p);
+    if(o.span>=45){
+      var mid=(o.s+o.span/2)/1440*360, rad=mid*Math.PI/180, rr=81;
+      var t=mk('text');t.setAttribute('class','pie-lbl');
+      t.setAttribute('x',(110+rr*Math.sin(rad)).toFixed(1));t.setAttribute('y',(110-rr*Math.cos(rad)).toFixed(1));
+      t.setAttribute('text-anchor','middle');t.setAttribute('dominant-baseline','central');
+      t.setAttribute('font-size', o.span>=180?11:(o.span>=90?9:8));
+      t.setAttribute('font-weight','700');t.setAttribute('fill','#fff');
+      t.setAttribute('stroke','rgba(45,40,32,.62)');t.setAttribute('stroke-width','2');t.setAttribute('paint-order','stroke');
+      t.setAttribute('pointer-events','none');
+      var nm=o.r.n.replace(/\s+/g,'');t.textContent=nm.length>5?nm.slice(0,5)+'…':nm;
+      g.appendChild(t);
+    }
+  });
+  var parts=[];
+  ivs.forEach(function(o){if(o.e>1440){parts.push([o.s,1440],[0,o.e-1440]);}else{parts.push([o.s,o.e]);}});
+  parts.sort(function(a,b){return a[0]-b[0];});
+  var merged=[],overlap=0,cur=null;
+  parts.forEach(function(iv){
+    if(cur&&iv[0]<cur[1]){overlap+=Math.min(iv[1],cur[1])-iv[0];cur[1]=Math.max(cur[1],iv[1]);}
+    else{cur=[iv[0],iv[1]];merged.push(cur);}
+  });
+  var gaps=[],pos=0;
+  merged.forEach(function(iv){if(iv[0]>pos)gaps.push([pos,iv[0]]);pos=Math.max(pos,iv[1]);});
+  if(pos<1440)gaps.push([pos,1440]);
+  gaps.forEach(function(gp){if(gp[1]-gp[0]<=0)return;
+    var p=mk('path');p.setAttribute('d',pieArc(gp[0]/1440*360,(gp[1]-gp[0])/1440*360));p.setAttribute('fill','#e8e2d4');p.setAttribute('opacity','.85');g.appendChild(p);});
+  return {gap:gaps.reduce(function(t,gp){return t+gp[1]-gp[0];},0),overlap:overlap,invalid:invalid};
+}
+function renderDayEditor(){
+  var box=document.getElementById('dayRows');if(!box)return;
+  box.innerHTML='';
+  dayRows.forEach(function(r,i){
+    var row=document.createElement('div');row.className='day-row';row.dataset.i=i;
+    var sw=document.createElement('span');sw.className='sw';sw.style.background=r.c;row.appendChild(sw);
+    var n=document.createElement('input');n.className='dr-n';n.dataset.f='n';n.value=r.n;n.placeholder='活动名称';row.appendChild(n);
+    var s=document.createElement('input');s.type='time';s.className='dr-t';s.dataset.f='s';s.value=r.s;row.appendChild(s);
+    var dash=document.createElement('span');dash.className='dr-dash';dash.textContent='–';row.appendChild(dash);
+    var e=document.createElement('input');e.type='time';e.className='dr-t';e.dataset.f='e';e.value=r.e;row.appendChild(e);
+    var sel=document.createElement('select');sel.className='dr-tag';sel.dataset.f='tag';
+    Object.keys(TAG_META).forEach(function(k){var op=document.createElement('option');op.value=k;op.textContent=TAG_META[k].t;if(k===r.tag)op.selected=true;sel.appendChild(op);});
+    row.appendChild(sel);
+    var h=document.createElement('span');h.className='dr-h';h.textContent=rowValid(r)?hStr(rowSpan(r)):'—';row.appendChild(h);
+    var del=document.createElement('button');del.className='dr-del';del.type='button';del.textContent='×';del.title='删除这条';row.appendChild(del);
+    box.appendChild(row);
+  });
+}
+function renderDaySum(stat){
+  var sum=document.getElementById('daySum');if(!sum)return;
+  var total=dayRows.reduce(function(t,r){return t+rowSpan(r);},0);
+  var screen=dayRows.reduce(function(t,r){return t+(r.tag==='ok'||r.tag==='free'?rowSpan(r):0);},0);
+  var learn=dayRows.reduce(function(t,r){return t+(r.tag==='learn'?rowSpan(r):0);},0);
+  var htmlArr=[];
+  htmlArr.push('已安排 <b>'+hStr(total)+'</b> / 24h');
+  if(stat.gap>0)htmlArr.push(' · 未安排 <span class="warn">'+hStr(stat.gap)+'</span>（灰色）');
+  else htmlArr.push(' · <span class="good">已排满 24h ✓</span>');
+  if(stat.overlap>0)htmlArr.push(' · <span class="warn">重叠 '+hStr(stat.overlap)+' ⚠</span>');
+  if(stat.invalid>0)htmlArr.push(' · <span class="warn">'+stat.invalid+' 行时间不完整 ⚠</span>');
+  htmlArr.push('<br>屏幕相关时间：学习用 <b>'+hStr(learn)+'</b> + 自由/娱乐 <b>'+hStr(screen)+'</b>，其余 '+(24-learn/60-screen/60).toFixed(1)+'h 无屏幕');
+  if(total>1440)htmlArr.push('<br><span class="warn">⚠ 已安排超过 24h（超出 '+hStr(total-1440)+'），请删减或缩短活动</span>');
+  sum.innerHTML=htmlArr.join('');
+  updateAddBtn(total);
+}
+function showCenter(o){
+  var c1=document.getElementById('pieC1'),c2=document.getElementById('pieC2');if(!c1)return;
+  var n=o.r.n||'(未命名)';
+  c1.textContent=n.length>8?n.substring(0,8)+'…':n;
+  c1.setAttribute('font-size','13');
+  c2.textContent=o.r.s+'–'+o.r.e+' · '+hStr(o.span);
+  c2.setAttribute('font-size','8.5');
+}
+function resetCenter(){
+  var c1=document.getElementById('pieC1'),c2=document.getElementById('pieC2');if(!c1)return;
+  c1.textContent='24h';c1.setAttribute('font-size','22');
+  c2.textContent='一天怎么分';c2.setAttribute('font-size','10');
+}
+function updateAddBtn(total){
+  var btn=document.getElementById('dayAddBtn');if(!btn)return;
+  var full=(total>=1440);
+  btn.disabled=full;
+  btn.textContent=full?'已排满 24h，不能再添加':'＋ 添加活动';
+}
+function renderDay(){renderDayEditor();var st=renderDayPie();renderDaySum(st||{gap:0,overlap:0,invalid:0});}
+(function initDay(){
+  var rows=document.getElementById('dayRows');if(!rows)return;
+  renderDay();
+  var pie=document.getElementById('dayPie');
+  if(pie)pie.addEventListener('click',resetCenter);
+  rows.addEventListener('input',function(ev){
+    var i=ev.target.closest('.day-row');if(!i)return;
+    var idx=+i.dataset.i,f=ev.target.dataset.f;if(!(idx in dayRows)||!f)return;
+    dayRows[idx][f]=ev.target.value;
+    var st=renderDayPie();renderDaySum(st||{gap:0,overlap:0});
+    var h=i.querySelector('.dr-h');if(h)h.textContent=rowValid(dayRows[idx])?hStr(rowSpan(dayRows[idx])):'—';
+  });
+  rows.addEventListener('click',function(ev){
+    if(!ev.target.classList.contains('dr-del'))return;
+    var i=ev.target.closest('.day-row');if(!i)return;
+    dayRows.splice(+i.dataset.i,1);renderDay();
+  });
+  var add=document.getElementById('dayAddBtn');
+  if(add)add.addEventListener('click',function(){
+    var used=dayRows.length;
+    dayRows.push({n:'新活动',s:'12:00',e:'13:00',tag:'no',c:PALETTE[used%PALETTE.length]});
+    renderDay();
+    var last=document.querySelectorAll('#dayRows .day-row:last-child .dr-n');
+    if(last[0])last[0].focus();
+  });
+})();
+
+
+
+
+</script>
+</body>
+</html>

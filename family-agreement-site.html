@@ -1,0 +1,384 @@
+<!DOCTYPE html><html lang="zh"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>家庭电子产品协议 · 沟通助手</title>
+<style>
+  :root{
+    --ink:#2b3a4a;--ink2:#55677a;--dim:#8496a8;
+    --teal:#2f8f8f;--teal-d:#267676;--amber:#e8a35a;--amber-d:#d18a3f;
+    --paper:#f7f5f0;--card:#ffffff;--line:#e7e2d8;--ok:#4a9d6b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--paper);color:var(--ink);
+    font-family:"PingFang SC","Microsoft YaHei",-apple-system,sans-serif;line-height:1.6;}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px;}
+
+  nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  nav .wrap{display:flex;align-items:center;height:60px;gap:24px;}
+  .brand{font-family:"Kaiti SC","STKaiti",serif;font-size:19px;font-weight:700;color:var(--teal-d);
+    letter-spacing:1px;white-space:nowrap;}
+  .links{display:flex;gap:20px;margin-left:auto;flex-wrap:wrap;}
+  .links a{font-size:14px;color:var(--ink2);text-decoration:none;cursor:pointer;}
+  .links a:hover{color:var(--teal);}
+  .nav-btn{background:var(--teal);color:#fff;border:none;padding:8px 18px;border-radius:20px;
+    font-size:14px;cursor:pointer;font-weight:600;letter-spacing:1px;}
+  .nav-btn:hover{background:var(--teal-d);}
+
+  .hero{padding:72px 0 60px;text-align:center;}
+  .hero .eyebrow{display:inline-block;font-size:13px;color:var(--teal);letter-spacing:2px;
+    border:1px solid var(--teal);border-radius:16px;padding:4px 16px;margin-bottom:18px;}
+  .hero h1{font-size:40px;line-height:1.3;letter-spacing:1px;font-weight:800;}
+  .hero h1 .accent{color:var(--teal);}
+  .hero p{font-size:17px;color:var(--ink2);max-width:640px;margin:16px auto 28px;}
+  .hero .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+  .btn{display:inline-block;padding:13px 30px;border-radius:26px;font-size:15px;cursor:pointer;
+    font-weight:700;letter-spacing:1px;border:none;text-decoration:none;}
+  .btn.primary{background:var(--teal);color:#fff;}
+  .btn.primary:hover{background:var(--teal-d);}
+  .btn.ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line);}
+  .btn.ghost:hover{border-color:var(--teal);color:var(--teal);}
+
+  section{padding:56px 0;}
+  .sec-head{text-align:center;margin-bottom:36px;}
+  .sec-head .kicker{font-size:13px;color:var(--amber-d);letter-spacing:2px;font-weight:700;}
+  .sec-head h2{font-size:30px;margin-top:6px;font-weight:800;}
+  .sec-head p{font-size:15px;color:var(--dim);max-width:640px;margin:10px auto 0;}
+
+  .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .why-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 24px;}
+  .why-card .n{font-size:30px;font-weight:800;color:var(--teal);opacity:.25;}
+  .why-card h3{font-size:17px;margin:8px 0 8px;}
+  .why-card p{font-size:14px;color:var(--ink2);}
+
+  .method-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:30px;}
+  .mstep{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;}
+  .mstep .num{width:38px;height:38px;border-radius:50%;background:var(--teal);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:17px;margin-bottom:12px;}
+  .mstep h3{font-size:17px;margin-bottom:8px;}
+  .mstep p{font-size:14px;color:var(--ink2);}
+
+  .demo{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 26px;margin-bottom:30px;}
+  .demo h3{font-size:16px;margin-bottom:14px;color:var(--teal-d);}
+  .dl{display:flex;flex-direction:column;gap:10px;}
+  .line{display:flex;gap:10px;align-items:flex-start;}
+  .who{flex:0 0 52px;font-size:13px;font-weight:700;color:#fff;border-radius:10px;
+    padding:3px 0;text-align:center;align-self:flex-start;}
+  .who.p{background:var(--teal);}
+  .who.k{background:var(--amber-d);}
+  .bub{background:#f7f5f0;border-radius:12px;padding:9px 14px;font-size:14.5px;max-width:720px;}
+
+  .dos{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;}
+  .dos .row{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);}
+  .dos .row:last-child{border-bottom:none;}
+  .dos .cell{padding:14px 20px;font-size:14px;}
+  .dos .head{font-size:13px;font-weight:700;letter-spacing:1px;background:#fbf9f4;}
+  .dos .no{color:#c05b5b;background:#fdf6f6;}
+  .dos .yes{color:var(--ok);background:#f5faf6;}
+
+  .wizard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:34px;
+    box-shadow:0 10px 40px rgba(43,58,74,.06);}
+  .wiz-progress{display:flex;gap:6px;margin-bottom:26px;flex-wrap:wrap;}
+  .wp-dot{flex:1;height:8px;border-radius:4px;background:var(--line);min-width:24px;transition:background .3s;}
+  .wp-dot.on{background:var(--teal);}
+  .wp-dot.done{background:var(--amber);}
+  .wiz-step .step-tag{font-size:13px;color:var(--amber-d);font-weight:700;letter-spacing:1px;}
+  .wiz-step h3{font-size:24px;margin:6px 0 14px;font-weight:800;}
+  .block{background:#fbf9f4;border-left:4px solid var(--teal);border-radius:10px;
+    padding:14px 18px;margin-bottom:14px;}
+  .block .label{font-size:12.5px;color:var(--dim);font-weight:700;letter-spacing:1px;margin-bottom:6px;}
+  .block .txt{font-size:15px;color:var(--ink);}
+  .qblock{background:#f6f8fb;border-left:4px solid var(--ink2);}
+  .qlist{margin:0 0 0 20px;padding:0;}
+  .qlist li{font-size:14.5px;color:var(--ink);margin-bottom:5px;}
+  .advice{background:#fffdf4;border-left:4px solid var(--amber);}
+  .advice ul{margin:0 0 0 18px;padding:0;}
+  .advice li{font-size:14.5px;color:var(--ink);margin-bottom:5px;}
+  .script{background:#f5faf6;border-left:4px solid var(--ok);}
+  .script .dl{gap:8px;}
+  .script .bub{background:#fff;}
+  .field{margin-bottom:16px;}
+  .field label{display:block;font-size:14px;font-weight:600;margin-bottom:6px;}
+  .field input,.field textarea{width:100%;border:1.5px solid var(--line);border-radius:10px;
+    padding:11px 14px;font-size:15px;font-family:inherit;color:var(--ink);background:#fff;}
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--teal);}
+  .field textarea{min-height:70px;resize:vertical;}
+  .wiz-nav{display:flex;justify-content:space-between;margin-top:22px;gap:12px;}
+  .wiz-nav .btn{min-width:110px;text-align:center;}
+
+  .agr-doc{border:2px solid var(--teal);border-radius:16px;padding:28px 30px;background:#fff;}
+  .agr-doc h3{text-align:center;font-size:22px;color:var(--teal-d);letter-spacing:2px;margin-bottom:6px;}
+  .agr-doc .sub{text-align:center;font-size:13px;color:var(--dim);margin-bottom:20px;}
+  .agr-doc .row{border-bottom:1.5px dashed var(--line);padding:12px 0;font-size:15px;}
+  .agr-doc .row:last-child{border-bottom:none;}
+  .agr-doc .row b{color:var(--teal-d);}
+  .agr-doc .sign{display:flex;gap:20px;margin-top:22px;flex-wrap:wrap;}
+  .agr-doc .sign div{flex:1;min-width:150px;border-top:1.5px solid var(--ink);padding-top:6px;font-size:13px;color:var(--dim);}
+
+  footer{background:var(--ink);color:#cdd7e0;padding:40px 0;margin-top:40px;}
+  footer .wrap{text-align:center;font-size:13.5px;line-height:1.9;}
+  footer b{color:#fff;}
+
+  @media(max-width:760px){
+    .why-grid,.method-steps{grid-template-columns:1fr;}
+    .dos .row{grid-template-columns:1fr;}
+    .hero h1{font-size:30px;}
+    .wizard{padding:22px;}
+  }
+  @media print{
+    nav,.hero,.why,.method,.wiz-nav,.wiz-progress,footer{display:none!important;}
+    body{background:#fff;}
+    .wizard{box-shadow:none;border:none;padding:0;}
+    section{padding:0;}
+    .agr-doc{border:2px solid #000;}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+</style></head><body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">家庭协议 · 沟通助手</div>
+    <div class="links">
+      <a onclick="go('why')">为什么</a>
+      <a onclick="go('method')">沟通心法</a>
+      <a onclick="go('wizard')">填写向导</a>
+    </div>
+    <button class="nav-btn" onclick="go('wizard')">开始填写</button>
+  </div>
+</nav>
+
+<header class="hero" id="home">
+  <div class="wrap">
+    <div class="eyebrow">鼎石《家庭电子产品使用协议》 · 官方指引</div>
+    <h1>把「签协议」变成<br>一次<span class="accent">好好说话</span>的家庭对话</h1>
+    <p>一份协议，不该是家长单方面宣布的规矩。这里帮你用对的方式，和孩子一起讨论、一起填写、一起约定——最后生成一份真正被双方接受的协议。</p>
+    <div class="cta">
+      <button class="btn primary" onclick="go('wizard')">开始填写协议</button>
+      <button class="btn ghost" onclick="go('method')">先学沟通心法</button>
+    </div>
+  </div>
+</header>
+
+<section class="why" id="why">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">WHY IT MATTERS</div>
+      <h2>为什么「谈」比「管」更有效</h2>
+      <p>理解这三个事实，你会换一种方式开口。</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card"><div class="n">01</div>
+        <h3>不是孩子意志力差，是产品太会设计</h3>
+        <p>短视频、游戏用「诱人目标、随机奖励、渐进升级」等 6 大钩子，成年人也难挡。先放下「贪玩」的评判，才能心平气和地聊。</p></div>
+      <div class="why-card"><div class="n">02</div>
+        <h3>命令带来对抗，商量带来合作</h3>
+        <p>「立刻关掉」往往换来「再五分钟」的拉锯。当孩子参与制定规则，规则就从「你的」变成「我们的」，他才会主动守。</p></div>
+      <div class="why-card"><div class="n">03</div>
+        <h3>目标是自主，不是隔绝</h3>
+        <p>我们不是要让孩子远离科技，而是陪他学会更自主、更平衡地使用。协议是这条路上的「共同地图」，不是锁链。</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="method" id="method">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">HOW TO TALK</div>
+      <h2>沟通三步法</h2>
+      <p>记住这三步，再难的开场也能变轻松。</p>
+    </div>
+    <div class="method-steps">
+      <div class="mstep"><div class="num">1</div><h3>先共情，再讲理</h3>
+        <p>先说出孩子的感受：「这局赢了会很有成就感吧？」让他感觉被理解，规则才听得进去。</p></div>
+      <div class="mstep"><div class="num">2</div><h3>给选择，不给命令</h3>
+        <p>把命令换成选择：「现在停，还是打完这一局停？」给孩子掌控感，他更愿意配合。</p></div>
+      <div class="mstep"><div class="num">3</div><h3>一起定，不是你定</h3>
+        <p>「我们一起商量个办法」比「就这么定了」有效十倍。孩子参与了，才会真的遵守。</p></div>
+    </div>
+
+    <div class="demo">
+      <h3>完整对话示范 · 睡前「再玩一局」</h3>
+      <div class="dl">
+        <div class="line"><span class="who p">家长</span><div class="bub">「我知道这局正打到关键，赢了会特别有成就感。」（共情）</div></div>
+        <div class="line"><span class="who k">孩子</span><div class="bub">「对啊，就差一点了！」</div></div>
+        <div class="line"><span class="who p">家长</span><div class="bub">「那你想现在打完这一局就睡，还是先洗漱、明晚提前半小时接着打？」（给选择）</div></div>
+        <div class="line"><span class="who k">孩子</span><div class="bub">「打完这局就睡。」</div></div>
+        <div class="line"><span class="who p">家长</span><div class="bub">「好，那我们一起定下来：每晚 9:30 关机，特殊情况可以提前跟我商量调 10 分钟。成交？」（一起定）</div></div>
+      </div>
+    </div>
+
+    <div class="dos">
+      <div class="row"><div class="cell head no">✗ 别这样说</div><div class="cell head yes">✓ 这样说</div></div>
+      <div class="row"><div class="cell no">别玩了，整天就知道玩！</div><div class="cell yes">这局打完就停，好吗？</div></div>
+      <div class="row"><div class="cell no">你眼睛还要不要了？</div><div class="cell yes">我担心你的眼睛，我们一起想想办法。</div></div>
+      <div class="row"><div class="cell no">别人的孩子都能自律，就你不行。</div><div class="cell yes">我们一起定个办法，让你也能管好自己。</div></div>
+      <div class="row"><div class="cell no">又超时了，手机没收！</div><div class="cell yes">我们约定的时间到了，接下来怎么办？</div></div>
+      <div class="row"><div class="cell no">你在跟谁聊天？拿来我看看。</div><div class="cell yes">我关心你在网上认识的人，能跟我聊聊吗？</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="wizard-sec" id="wizard">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">FILL THE AGREEMENT</div>
+      <h2>协议填写向导</h2>
+      <p>七步走完（对应协议 6 大话题 + 奖惩跟进），每步先看「原文讨论问题 + 鼎石建议」，再照着话术和孩子聊，最后填写生成你们的正式协议。</p>
+    </div>
+    <div class="wizard" id="wizardBox"></div>
+  </div>
+</section>
+
+<footer id="about">
+  <div class="wrap">
+    <b>家庭电子产品协议 · 沟通助手</b><br>
+    依据《北京市鼎石学校家庭电子产品使用协议》改编 · 家长与学生共同讨论、共同确认<br>
+    电脑使用须始终符合《北京市鼎石学校信息技术合理使用规范》
+  </div>
+</footer>
+
+<script id="app">
+const STEPS=[
+ {t:'时间与地点',
+  why:'在大人看得见的公共空间使用，能自然减少过度沉迷；固定关机时间，保护 8–10 小时睡眠。',
+  questions:['确定适合学生在家中使用电子产品的区域（比如在家中的公共空间、卧室、浴室中及餐桌上是否可以使用？）',
+             '考虑学生可以使用电子产品的时长；',
+             '问一问自己："我们应如何在写作业、睡眠、或做其它活动及使用电子产品之间取得平衡？"'],
+  advice:['任何电子设备只能在显示屏对成年人可见的公共空间使用；学生不应在使用电子设备时关闭房门；',
+          '为保证学生 8-10 小时的必要睡眠，全家共同决定一个晚间关闭学生所有电子产品的时间；',
+          '确定一个在学生卧室以外，用于晚间为所有电子产品充电的区域；',
+          '注意：鼎石寄宿生活项目要求所有住宿生每晚将电子产品存放到指定的充电车内（包括手机、平板电脑及笔记本电脑等），并于次日清晨取回。'],
+  open:'「我们想跟你一起定个全家都舒服的用法——你觉得手机平板放在哪里用最合适？卧室、客厅，还是饭桌上？」',
+  kid:'「我房间！我房间最安静，没人吵我。」',
+  parent:'「我知道你想有个安静的地方。但电子产品在爸妈看得见的地方用，是我们家的安全底线——不是不信你，是万一遇到不好的东西，我们能第一时间发现。你选：客厅，还是书房？」',
+  fields:[['我们的家庭计划 · 使用区域','例如：客厅、书房等公共空间'],['每晚关机时间','例如：21:30'],['充电位置','例如：客厅充电架，不进卧室']]},
+ {t:'如何跟进（奖与惩）',
+  why:'提前商量好的奖励与后果，比事后发火更公平，孩子也更愿意遵守。',
+  questions:['鼎石建议家庭成员在如何处理学生违规使用电子产品的问题上达成共识，以期协议可以顺利实施。'],
+  advice:['奖 例如：家庭奖励积分；',
+          '惩 例如：晚餐时使用手机会导致当晚手机被没收；如果孩子声称需要使用电脑完成作业，但实际上却在用电脑看电影，将导致学生不得参加近期的某个活动。'],
+  open:'「做得好我们怎么奖励你？做过头我们怎么提醒你？你先提，我们一起定。」',
+  kid:'「那我要多玩半小时。」',
+  parent:'「可以商量。不过奖励和后果要对等——你连续一周按时交手机，就多一次周末特权；但如果骗我说写作业、其实在玩游戏，这个特权就取消。你觉得公平吗？」',
+  fields:[['出色使用电子产品将会','例如：家庭积分 / 周末多一次特权'],['不当使用电子产品将会','例如：当晚没收 / 取消近期活动']]},
+ {t:'使用与监督',
+  why:'监督不是监视，而是「我关心你在网上遇到什么」；方式对了，孩子才不抵触。',
+  questions:['在如何使用电子设备的问题上保持开放、诚恳的对话；',
+             '制定一个针对学生居家使用电子产品的计划；',
+             '讨论家长应如何监督学生们对电子产品的使用，检查学生浏览过的网站。'],
+  advice:['家长负责监督学生在校外使用电子设备的情况；',
+          '家长可以随时检查学生的电子设备。'],
+  open:'「我不是要翻你的隐私，是想在你需要时帮上忙。我们约定一个检查方式好不好？」',
+  kid:'「那你会不会天天翻我手机？」',
+  parent:'「不会。我们定成每周一次、一起看，而且查之前我先跟你说。为了公平，你也可以看我的手机。」',
+  fields:[['监督方式','例如：每周一起看一次'],['频率','例如：每周一次 / 随机抽查']]},
+ {t:'隐私与密码',
+  why:'安全优先，但也要尊重孩子的空间感——两者可以兼得。',
+  questions:['请家长和孩子共同设置安全性高的密码；',
+             '请家长帮助孩子理解不与他人分享密码的重要性；',
+             '请讨论如下问题：家长将如何监督学生的上网情况，并如何协助他们做出正确的选择？家长将如何监督孩子与他人的在线交流（包括电子邮件、短信、即时信息、TEAMS 上的语音、视频通话、微信等）？',
+             '确定学生在需要时可以找哪位家庭成员沟通，以及沟通的方式和时间。'],
+  advice:['家长须掌握学生所有登录帐号（包括在校账号）以及在线应用的密码；',
+          '家长应监控学生访问的网站；',
+          '家长应监控学生在线交流的内容及其得体性；',
+          '家长应监督并有权查看学生社交媒体的内容；在家长询问时，学生应提供微信、QQ 等密码；',
+          '家长应控制孩子在家上网的时间，学生不得在个人设备上安装 VPN。'],
+  open:'「为了你的安全，我需要知道账号密码；作为交换，我保证不随便翻，查之前先跟你说。」',
+  kid:'「凭什么？这是我的隐私！」',
+  parent:'「我理解你想有自己的空间。但网上有些危险你可能还分辨不了，我知道密码才能在关键时刻帮你。这不是监视，是『安全带』——平时不碰，出事才用。你同意吗？」',
+  fields:[['家长掌握的账号','例如：所有账号（含学校账号）'],['检查约定','例如：查之前先打招呼']]},
+ {t:'在线安全',
+  why:'孩子在网络世界也需要「遇到危险找谁」的底气，让他敢开口、不自己扛。',
+  questions:['讨论在线安全的重要性。如孩子在外出时家长需要知道孩子的去向及正在做什么一样，家长同样应该掌握孩子在网络世界的行踪和举动；',
+             '讨论在线分享信息，及孩子们应如何在网络世界中保护自己。'],
+  advice:['和孩子强调在网络上发布任何信息时务必留心，避免向陌生人透露任何个人信息；',
+          '学生创建任何在线账户前必须征得家长的同意；',
+          '如屏幕上出现不恰当的内容，孩子必须立即向成人汇报；',
+          '如收到他人发送的不恰当信息，孩子必须立即向成人汇报；',
+          '孩子不应与陌生人在线交流。如被不熟悉的用户联系，孩子必须立即向成人汇报。'],
+  open:'「万一网上遇到让你不舒服的人或内容，第一时间告诉爸爸妈妈，我们永远站在你这边。」',
+  kid:'「说了会不会被骂？」',
+  parent:'「不会。无论发生了什么，你先告诉我，我们一起解决，绝不先批评你。这是我们家最重要的约定。」',
+  fields:[['遇到问题先找谁','例如：妈妈 / 爸爸 / 任一家长']]},
+ {t:'保养与维修',
+  why:'电脑是较贵的设备，学会爱惜与负责，是「负责任」的一部分。',
+  questions:['电脑是较为昂贵的设备，请讨论如何负责任地爱惜使用。讨论：为什么要爱惜电子设备？谁来负责产品的保养和维修？"负责任"的具体含义是什么？设备损坏、丢失或被盗时应该怎么做？'],
+  advice:['电脑应放在保护袋中携带，比如使用鼎石配备的保护袋；',
+          '孩子应明确在不同情况下保护电子设备的方式。例如下雨时需要使用可以防水的保护袋；',
+          '应双手持电脑，在周围有饮料和食物时需要格外当心；',
+          '在不使用电脑时，将其放在安全场所；',
+          '学生不得以手持笔记本显示屏的方式携带电脑。'],
+  open:'「电脑挺贵的，我们一起聊聊怎么爱惜它。你觉得谁该负责维修？」',
+  kid:'「坏了就修呗，又不是我故意的。」',
+  parent:'「不是故意也会磕到。我们定个办法：放保护袋、双手拿、别边吃边用；万一坏了，我们一起修，你学着动手。这样你才会越来越会照顾东西。」',
+  fields:[['保管方式','例如：保护袋携带、双手持拿'],['维修责任','例如：谁弄坏谁负责 / 共同分担']]},
+ {t:'数字公民意识',
+  why:'网上的言行也是「做人」；友善、得体、敢挺身而出，是数字时代的品格。',
+  questions:['讨论在网络世界中行为得体、友善、懂礼貌的重要性。'],
+  advice:['不乱发邮件、信息（即重复发送他人不愿接收的信息）；',
+          '上传他人的任何图片或视频影像的信息前需征得对方同意；',
+          '任何情况下不使用具有伤害性、不得体或粗俗的语言。',
+          '我们鼓励学生成为一名能够挺身而出的人，始终保持积极的心态，为被霸凌的人提供支持。'],
+  open:'「发别人照片前先问问对方；看到有人被欺负，你敢不敢帮一把？」',
+  kid:'「别人都转，我不转显得不合群。」',
+  parent:'「我懂，合群很重要。但真正的勇敢，是别人起哄时你说一句『别发了』，或者悄悄安慰被笑的人。我们永远为这样的你骄傲。」',
+  fields:[['发布约定','例如：发他人照片前先征得同意'],['霸凌应对','例如：声援被欺负的人、告诉大人']]},
+];
+
+const $=id=>document.getElementById(id);
+let cur=0, answers={};
+function go(id){const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'});}
+
+function render(){
+  const s=STEPS[cur];
+  const dots=STEPS.map((_,k)=>`<div class="wp-dot ${k<cur?'done':k===cur?'on':''}"></div>`).join('');
+  $('wizardBox').innerHTML=`
+    <div class="wiz-progress">${dots}</div>
+    <div class="wiz-step">
+      <div class="step-tag">第 ${cur+1} / ${STEPS.length} 步</div>
+      <h3>${s.t}</h3>
+      <div class="block"><div class="label">为什么这一条重要</div><div class="txt">${s.why}</div></div>
+      <div class="block qblock"><div class="label">原文 · 讨论问题</div>
+        <ol class="qlist">${s.questions.map(q=>`<li>${q}</li>`).join('')}</ol></div>
+      <div class="block advice"><div class="label">原文 · 鼎石建议</div>
+        <ul>${s.advice.map(a=>`<li>${a}</li>`).join('')}</ul></div>
+      <div class="block script"><div class="label">怎么开口聊 · 三轮对话样例</div>
+        <div class="dl">
+          <div class="line"><span class="who p">家长</span><div class="bub">${s.open}</div></div>
+          <div class="line"><span class="who k">孩子</span><div class="bub">${s.kid}</div></div>
+          <div class="line"><span class="who p">家长</span><div class="bub">${s.parent}</div></div>
+        </div></div>
+      ${s.fields.map((f,k)=>`
+        <div class="field"><label>${f[0]}</label>
+        <input id="f${k}" placeholder="${f[1]}" value="${answers[s.t+'_'+k]||''}"></div>`).join('')}
+      <div class="wiz-nav">
+        <button class="btn ghost" id="back" ${cur===0?'style="visibility:hidden"':''}>上一步</button>
+        <button class="btn primary" id="next">${cur<STEPS.length-1?'下一步':'生成协议'}</button>
+      </div>
+    </div>`;
+  if(cur>0)$('back').onclick=()=>{saveStep();cur--;render();};
+  $('next').onclick=()=>{saveStep();if(cur<STEPS.length-1){cur++;render();}else finish();};
+}
+function saveStep(){
+  const s=STEPS[cur];
+  s.fields.forEach((f,k)=>{const v=$('f'+k).value.trim();if(v)answers[s.t+'_'+k]=v;});
+}
+function finish(){
+  $('wizardBox').innerHTML=`
+    <div class="agr-doc" id="agrDoc">
+      <h3>我们的家庭电子产品协议</h3>
+      <div class="sub">家庭成员一起讨论并确认</div>
+      ${STEPS.map(s=>{
+        const vals=s.fields.map((f,k)=>answers[s.t+'_'+k]||'（未填写）');
+        return `<div class="row"><b>${s.t}：</b>${vals.join('　·　')}</div>`;
+      }).join('')}
+      <div class="sign"><div>学生签名：</div><div>家长 / 监护人签名：</div><div>日期：</div></div>
+      <div style="text-align:center;margin-top:18px">
+        <button class="btn primary" onclick="window.print()">打印 / 存为 PDF</button>
+        <button class="btn ghost" onclick="location.reload()">重新填写</button>
+      </div>
+    </div>`;
+  $('agrDoc').scrollIntoView({behavior:'smooth'});
+}
+render();
+</script></body></html>
